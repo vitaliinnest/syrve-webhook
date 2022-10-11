@@ -86,3 +86,52 @@ export interface IOrderCreatePayload {
         phone: string;
     }
 }
+
+
+export interface IDeliveryCreatePayload {
+    organizationId: string;
+    order: {
+        orderTypeId: string;
+        phone: string;
+        deliveryPoint?: {
+            address?: {
+                street: {
+                    name: string;
+                    city: string;
+                };
+                house: string;
+            }
+            comment?: string;
+        }
+        comment?: string;
+        customer: {
+            name: string;
+            type: 'one-time'
+        };
+        payments: {
+            paymentTypeKind: "Cash" | "Card"
+            sum: number;
+            paymentTypeId: string;
+        }[] | [];
+        items: {
+            productId: string;
+            price: number;
+            type: "Product" | "Compound";
+            amount: number;
+            comment?: string;
+        }[];
+    }
+}
+
+export interface ITildaProduct {
+    name: string;
+    quantity: string;
+    amount: string;
+    price: string;
+    sku: string;
+    options?: (OptionsEntity)[] | null;
+}
+export interface OptionsEntity {
+    option: string;
+    variant: string;
+}
