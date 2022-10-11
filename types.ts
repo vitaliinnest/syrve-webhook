@@ -90,6 +90,7 @@ export interface IOrderCreatePayload {
 
 export interface IDeliveryCreatePayload {
     organizationId: string;
+    terminalGroupId: string;
     order: {
         orderTypeId: string;
         phone: string;

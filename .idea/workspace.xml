@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="128b4031-7940-433e-9fe8-4c527bb298ac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/mock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/syrve/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/syrve/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/SyrveApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/SyrveApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +55,7 @@
       <workItem from="1665320242933" duration="2510000" />
       <workItem from="1665391689864" duration="1035000" />
       <workItem from="1665404118975" duration="11496000" />
-      <workItem from="1665478613559" duration="10575000" />
+      <workItem from="1665478613559" duration="11665000" />
     </task>
     <servers />
   </component>

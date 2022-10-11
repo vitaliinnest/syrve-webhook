@@ -7,6 +7,8 @@ import {to} from "../../modules";
 const webhook = async (req: Request, res: Response) => {
     if(!req.body.formid || !Object.values(config.SYRVE.forms).includes(req.body.formid)) return res.status(404).send({ success: false, error: "FormID not found in config" });
 
+    console.log(JSON.stringify(req.body));
+
     const phone = (() => {
         switch (req.body.formid) {
             case (config.SYRVE.forms["full-order"]): return req.body.phone;
@@ -33,6 +35,7 @@ const webhook = async (req: Request, res: Response) => {
 function oneClickOrder(phone: string): IDeliveryCreatePayload {
     return {
         organizationId: config.SYRVE.organizationId,
+        terminalGroupId: config.SYRVE.terminalGroupId,
         order: {
             phone,
             comment: "| ЗАКАЗ В ОДИН КЛИК |",
@@ -70,6 +73,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
 
     return {
         organizationId: config.SYRVE.organizationId,
+        terminalGroupId: config.SYRVE.terminalGroupId,
         order: {
             orderTypeId: body.deliveryvar.includes('Доставка по адресу') ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
             phone: body.phone,
