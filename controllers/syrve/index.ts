@@ -9,16 +9,19 @@ const webhook = async (req: Request, res: Response) => {
 
     if(req.body.test) return res.status(200).send({ success: true });
 
-    if(!req.body.formid || !Object.values(config.SYRVE.forms).includes(req.body.formid)) return res.status(404).send({ success: false, error: "FormID not found in config" });
+    const phone = req.body["phone"] || req.body["one_click"];
+    console.log(`Phone: ${phone}`)
 
-    const phone = (() => {
-        switch (req.body.formid) {
-            case (config.SYRVE.forms["full-order"]): return req.body.phone;
-            case (config.SYRVE.forms["one-click"]):  return req.body["one_click"];
-        }
-    })();
+    if(!phone) {
+        console.log(`Phone not found in body: `, phone)
 
-    const delivery = req.body.formid === config.SYRVE.forms["one-click"] ? oneClickOrder(phone) : await fullOrder(req.body);
+        return res.status(200).send({ success: false, error: "Phone not found" });
+    }
+
+    const type = req.body["phone"] ? "full_order" : "one_click";
+    console.log(`Type: ${type}`)
+
+    const delivery = type === "one_click" ? oneClickOrder(phone) : await fullOrder(req.body);
 
     const [ error, result ] = await to(syrveApi.create_delivery(delivery));
 
