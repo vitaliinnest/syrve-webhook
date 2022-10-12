@@ -5,9 +5,11 @@ import syrveApi from "../../modules/SyrveApi";
 import {to} from "../../modules";
 
 const webhook = async (req: Request, res: Response) => {
-    if(!req.body.formid || !Object.values(config.SYRVE.forms).includes(req.body.formid)) return res.status(404).send({ success: false, error: "FormID not found in config" });
-
     console.log(JSON.stringify(req.body));
+
+    if(req.body.test) return res.status(200).send({ success: true });
+
+    if(!req.body.formid || !Object.values(config.SYRVE.forms).includes(req.body.formid)) return res.status(404).send({ success: false, error: "FormID not found in config" });
 
     const phone = (() => {
         switch (req.body.formid) {
