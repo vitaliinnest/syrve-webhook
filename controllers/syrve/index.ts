@@ -105,7 +105,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
                     },
                     house: `${dhouse} ${dapt}`,
                 },
-                comment: `| NEW | ${deliveryvar} | NEW |\n${[dcity, dstreet, dhouse, dapt].join(', ')}\nОплата: ${ paymentsystem === "cash" ? "Cash" : "Card" }`
+                comment: `| NEW | ${deliveryvar} | NEW |\n${[dcity, dstreet, dhouse, dapt].filter(Boolean).join(', ')}\nОплата: ${ paymentsystem === "cash" ? "Cash" : "Card" }`
             },
             payments: [
                 {
