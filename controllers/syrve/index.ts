@@ -1,8 +1,9 @@
+import { IDeliveryCreatePayload, ITildaProduct } from "../../types";
 import { Request, Response } from "express";
-import config from "../../config";
-import {IDeliveryCreatePayload, ITildaProduct} from "../../types";
+import { to } from "../../modules";
+
 import syrveApi from "../../modules/SyrveApi";
-import {to} from "../../modules";
+import config from "../../config";
 
 const webhook = async (req: Request, res: Response) => {
     console.log(JSON.stringify(req.body));
@@ -80,7 +81,9 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
     const products = payment.products.reduce((array: any, row: ITildaProduct) => {
         const { price, quantity } = row;
 
-        array.push({ productId: productIds[row.sku].id, modifiers: productIds[row.sku].modifiers.map((row: any) => ({ productId: row.id, productGroupId: row.productGroupId, amount: 1 })), price: +price, type: 'Product', amount: +quantity })
+        if(productIds[row.sku] && productIds[row.sku].id) {
+            array.push({ productId: productIds[row.sku].id, modifiers: productIds[row.sku].modifiers.map((row: any) => ({ productId: row.id, productGroupId: row.productGroupId, amount: 1 })), price: +price, type: 'Product', amount: +quantity })
+        }
 
         return array;
     }, []);
