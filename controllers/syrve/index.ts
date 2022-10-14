@@ -80,7 +80,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
     const products = payment.products.reduce((array: any, row: ITildaProduct) => {
         const { price, quantity } = row;
 
-        array.push({ productId: productIds[row.sku].id, modifiers: productIds[row.sku].modifiers.map((row: any) => ({ productId: row.id, productGroupId: row.productGroupId, amount: 1 })), price: +price, type: 'Product', amount: +quantity, comment })
+        array.push({ productId: productIds[row.sku].id, modifiers: productIds[row.sku].modifiers.map((row: any) => ({ productId: row.id, productGroupId: row.productGroupId, amount: 1 })), price: +price, type: 'Product', amount: +quantity })
 
         return array;
     }, []);
