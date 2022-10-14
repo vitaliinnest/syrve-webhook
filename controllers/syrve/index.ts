@@ -74,7 +74,7 @@ function oneClickOrder(phone: string): IDeliveryCreatePayload {
 }
 
 async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
-    const { lang = "RU", name = "", phone = "", deliveryvar = "", dstreet = "", dcity = "Харьков", dhouse = "", dapt = "", comment = "", paymentsystem = "cash", payment = { amount: 0, products: [] } } = body;
+    const { lang = "RU", name = "", phone = "", deliveryvar = "", dstreet = "", dcity = "Харьков", dhouse = "00", dapt = "", comment = "", paymentsystem = "cash", payment = { amount: 0, products: [] } } = body;
 
     const productIds = await syrveApi.products(payment.products);
 
