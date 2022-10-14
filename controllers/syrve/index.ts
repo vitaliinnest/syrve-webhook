@@ -33,6 +33,8 @@ const webhook = async (req: Request, res: Response) => {
 
     console.log(JSON.stringify(delivery, null, 2))
 
+    console.log(JSON.stringify(result, null, 2))
+
     res.send(result)
 }
 
