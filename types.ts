@@ -97,8 +97,9 @@ export interface IDeliveryCreatePayload {
         deliveryPoint?: {
             address?: {
                 street: {
-                    name: string;
-                    city: string;
+                    id: string;
+                    name?: string;
+                    city?: string;
                 };
                 house: string;
             }

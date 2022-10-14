@@ -4,6 +4,14 @@ interface IConfig {
         apiLogin: string;
         organizationId: string;
         terminalGroupId: string;
+        menu_lang: {
+            UKR: string;
+            RUS: string;
+        }
+        cities: {
+            UA: string;
+            RU: string;
+        };
         products: {
             one_click: string;
         }
@@ -30,6 +38,14 @@ const config: IConfig = {
         apiLogin: "f305a494-3cd",
         organizationId: "ecaebd61-e4f7-46b7-ab02-8367249446e0",
         terminalGroupId: "a556d82b-38a9-d371-016f-3c7cfc8500cc",
+        menu_lang: {
+            UKR: "fa826cdd-9b44-4cd7-b1c7-f2ed736b956e",
+            RUS: "66b85226-49f8-43fd-9764-a4da6a3cc178"
+        },
+        cities: {
+            RU: "9954a54d-ed99-ce55-0182-3b21dc2760cf",
+            UA: "9954a54d-ed99-ce55-0182-3b21dc2796e6"
+        },
         products: {
             one_click: "6e5c95a1-a6f0-4348-9922-5f7186383577"
         },

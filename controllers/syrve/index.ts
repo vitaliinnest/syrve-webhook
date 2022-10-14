@@ -31,7 +31,7 @@ const webhook = async (req: Request, res: Response) => {
         return res.send( { success: false, error })
     }
 
-    console.log(result)
+    console.log(JSON.stringify(delivery, null, 2))
 
     res.send(result)
 }
@@ -43,10 +43,18 @@ function oneClickOrder(phone: string): IDeliveryCreatePayload {
         terminalGroupId: config.SYRVE.terminalGroupId,
         order: {
             phone,
-            comment: "| ЗАКАЗ В ОДИН КЛИК |",
+            comment: "| NEW | ЗАКАЗ В ОДИН КЛИК | NEW |",
             orderTypeId: config.SYRVE.order_types.deliveryByCourier,
+            deliveryPoint: {
+                address: {
+                    street: {
+                        id: "78d6bf50-164e-408e-9638-c0133ea3c320"
+                    },
+                    house: "00"
+                }
+            },
             customer: {
-                name: "One Click Order",
+                name: "| NEW | ЗАКАЗ В ОДИН КЛИК | NEW |",
                 type: 'one-time'
             },
             payments: [],
@@ -63,45 +71,45 @@ function oneClickOrder(phone: string): IDeliveryCreatePayload {
 }
 
 async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
-    const productIds = await syrveApi.products(body.payment.products.map((row: any) => row.sku));
+    const { lang = "RU", name = "", phone = "", deliveryvar = "", dstreet = "", dcity = "Харьков", dhouse = "", dapt = "", comment = "", paymentsystem = "cash", payment = { amount: 0, products: [] } } = body;
 
-    const products = body.payment.products?.reduce((array: any, row: ITildaProduct) => {
-        const { options, price, quantity } = row;
+    const productIds = await syrveApi.products(payment.products);
 
-        const comment = Array.isArray(options) ? options.map(({ option, variant }) => `${option}: ${variant}`).join(' - ') : "";
+    const products = payment.products.reduce((array: any, row: ITildaProduct) => {
+        const { price, quantity } = row;
 
-        array.push({ productId: productIds[row.sku], price: +price, type: 'Product', amount: +quantity, comment })
+        array.push({ productId: productIds[row.sku].id, modifiers: productIds[row.sku].modifiers.map((row: any) => ({ productId: row.id, productGroupId: row.productGroupId, amount: 1 })), price: +price, type: 'Product', amount: +quantity, comment })
 
         return array;
     }, []);
 
+    const street = await syrveApi.street(lang, dstreet);
 
     return {
         organizationId: config.SYRVE.organizationId,
         terminalGroupId: config.SYRVE.terminalGroupId,
         order: {
-            orderTypeId: body.deliveryvar.includes('Доставка по адресу') ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
-            phone: body.phone,
-            comment: body.comment || "",
+            orderTypeId: deliveryvar.includes('Доставка по адресу') ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
+            phone,
+            comment: comment ? `| NEW | ${comment} | NEW |` : "",
             customer: {
-                name: body.name || "Not passed",
+                name,
                 type: "one-time"
             },
             deliveryPoint: {
                 address: {
                     street: {
-                        name: body.dstreet,
-                        city: body.dcity
+                        id: street
                     },
-                    house: body.dhouse || "",
+                    house: `${dhouse} ${dapt}`,
                 },
-                comment: body.deliveryvar
+                comment: `| NEW | ${deliveryvar} | NEW |\n${[dcity, dstreet, dhouse, dapt].join(', ')}\nОплата: ${ paymentsystem === "cash" ? "Cash" : "Card" }`
             },
             payments: [
                 {
-                    paymentTypeKind: body.paymentsystem === "cash" ? "Cash" : "Card",
-                    sum: +body.payment.amount,
-                    paymentTypeId: body.paymentsystem === "cash" ? config.SYRVE.payments.cash : config.SYRVE.payments.card
+                    paymentTypeKind: "Card",
+                    sum: +payment.amount,
+                    paymentTypeId: config.SYRVE.payments.card
                 }
             ],
             items: products
