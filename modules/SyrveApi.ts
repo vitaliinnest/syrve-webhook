@@ -81,7 +81,7 @@ class SyrveApi {
         }
 
         function findModifiers(product: any, options: any, nomenclature: any) {
-            return product.groupModifiers
+            const modifiers = product.groupModifiers
                 .filter((x: any) => x.required)
                 .map(({ id: productGroupId, childModifiers }: any) => {
                     const modifier = childModifiers.find((childModifier: any) => {
@@ -90,8 +90,12 @@ class SyrveApi {
                         return Object.keys(modifier).length && options.map(({ variant }: any) => variant).includes(modifier.name);
                     });
 
-                    if(modifier) return { ...modifier, productGroupId }
+                    if(modifier.id) return { ...modifier, productGroupId }
                 })
+
+            if(!modifiers.length) return [];
+
+            return modifiers;
         }
 
         return products.reduce((object: any, row: any) => {
