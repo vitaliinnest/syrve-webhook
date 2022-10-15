@@ -102,6 +102,7 @@ export interface IDeliveryCreatePayload {
                     city?: string;
                 };
                 house: string;
+                flat?: string;
             }
             comment?: string;
         }
