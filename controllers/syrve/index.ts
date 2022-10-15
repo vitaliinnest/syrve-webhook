@@ -92,7 +92,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
         organizationId: config.SYRVE.organizationId,
         terminalGroupId: config.SYRVE.terminalGroupId,
         order: {
-            orderTypeId: deliveryvar.includes('Доставка по адресу') ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
+            orderTypeId: deliveryvar.includes('Доставка по адресу') || deliveryvar.includes('Доставка за адресою') ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
             phone,
             comment: comment ? `| NEW | ${comment} | NEW |` : "",
             customer: {
