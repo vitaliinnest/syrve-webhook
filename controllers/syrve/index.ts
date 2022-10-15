@@ -79,10 +79,8 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
     const productIds = await syrveApi.products(payment.products);
 
     const products = payment.products.reduce((array: any, row: ITildaProduct) => {
-        const { price, quantity } = row;
-
         if(productIds[row.sku] && productIds[row.sku].id) {
-            array.push({ productId: productIds[row.sku].id, modifiers: productIds[row.sku].modifiers.map((row: any) => ({ productId: row.id, productGroupId: row.productGroupId, amount: 1 })), price: +price, type: 'Product', amount: +quantity })
+            array.push({ productId: productIds[row.sku].id, modifiers: productIds[row.sku].modifiers.map((row: any) => ({ productId: row.id, productGroupId: row.productGroupId, amount: 1 })), type: 'Product', amount: +row.quantity })
         }
 
         return array;
