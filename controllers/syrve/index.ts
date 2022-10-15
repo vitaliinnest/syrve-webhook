@@ -110,13 +110,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
                 },
                 comment: `| NEW | ${deliveryvar} | NEW |\n${[dcity, dstreet, dhouse, dapt].filter(Boolean).join(', ')}\nОплата: ${ paymentsystem === "cash" ? "Cash" : "Card" }`
             },
-            payments: [
-                {
-                    paymentTypeKind: "Card",
-                    sum: +payment.amount,
-                    paymentTypeId: config.SYRVE.payments.card
-                }
-            ],
+            payments: [],
             items: products
         }
     }
