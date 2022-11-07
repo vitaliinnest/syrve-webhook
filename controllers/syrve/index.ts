@@ -24,19 +24,19 @@ const webhook = async (req: Request, res: Response) => {
 
     const delivery = type === "one_click" ? oneClickOrder(phone) : await fullOrder(req.body);
 
-    // const [ error, result ] = await to(syrveApi.create_delivery(delivery));
-    //
-    // if(error) {
-    //     console.error(error)
-    //
-    //     return res.send( { success: false, error })
-    // }
-    //
-    // console.log(JSON.stringify(delivery, null, 2))
-    //
-    // console.log(JSON.stringify(result, null, 2))
+    const [ error, result ] = await to(syrveApi.create_delivery(delivery));
 
-    res.send(delivery)
+    if(error) {
+        console.error(error)
+
+        return res.send( { success: false, error })
+    }
+
+    console.log(JSON.stringify(delivery, null, 2))
+
+    console.log(JSON.stringify(result, null, 2))
+
+    res.send(result)
 }
 
 
