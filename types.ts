@@ -1,4 +1,4 @@
-export interface IOrder {
+export interface ITildaOrder {
     name: string;
     one_click?: string;
     mark: string;
@@ -34,12 +34,10 @@ export interface ProductsEntity {
     amount: string;
     price: string;
     sku: string;
-    options?: (OptionsEntity)[] | null;
-}
-
-export interface OptionsEntity {
-    option: string;
-    variant: string;
+    options?: ({
+        option: string;
+        variant: string;
+    })[] | null;
 }
 
 export interface ISyrveAccessToken {
@@ -49,44 +47,12 @@ export interface ISyrveAccessToken {
 
 export interface ISyrveOrganizations {
     correlationId: string;
-    organizations?: (OrganizationsEntity)[] | null;
-}
-export interface OrganizationsEntity {
-    responseType: string;
-    id: string;
-    name: string;
-}
-
-export interface IOrderCreatePayload {
-    organizationId: string;
-    terminalGroupId: string;
-    order: {
+    organizations?: ({
+        responseType: string;
         id: string;
-        externalNumber: string;
-        customer?: {
-          id?: string;
-          name?: string;
-          surname?: string;
-          comment?: string;
-          email?: string;
-          shouldReceiveOrderStatusNotifications?: boolean;
-          type?: "regular" | "one-time";
-        };
-        items: {
-            productId: string;
-            price: number;
-            type: "Product" | "Compound";
-            amount: number;
-        }[];
-        payments: {
-            paymentTypeKind: "Cash" | "Card"
-            sum: number;
-            paymentTypeId: string;
-        }[] | [];
-        phone: string;
-    }
+        name: string;
+    })[] | null;
 }
-
 
 export interface IDeliveryCreatePayload {
     organizationId: string;
@@ -116,14 +82,23 @@ export interface IDeliveryCreatePayload {
             sum: number;
             paymentTypeId: string;
         }[] | [];
-        items: {
-            productId: string;
-            price: number;
-            type: "Product" | "Compound";
-            amount: number;
-            comment?: string;
-        }[];
+        items: IDeliveryItem[];
     }
+}
+
+export interface IDeliveryItem {
+    productId: string;
+    type: "Product";
+    price?: number;
+    name?: string;
+    amount: number;
+    comment?: string;
+    modifiers?: {
+        productId: string;
+        name?: string;
+        amount: number;
+        productGroupId: string;
+    }[];
 }
 
 export interface ITildaProduct {
@@ -137,4 +112,130 @@ export interface ITildaProduct {
 export interface OptionsEntity {
     option: string;
     variant: string;
+    quantity?: number;
+}
+
+export namespace ISyrveNomenclatureSpace {
+    export interface Group {
+        imageLinks: any[];
+        parentGroup: string;
+        order: number;
+        isIncludedInMenu: boolean;
+        isGroupModifier: boolean;
+        id: string;
+        code: string;
+        name: string;
+        description: string;
+        additionalInfo?: any;
+        tags: any[];
+        isDeleted: boolean;
+        seoDescription?: any;
+        seoText?: any;
+        seoKeywords?: any;
+        seoTitle?: any;
+    }
+
+    export interface ProductCategory {
+        id: string;
+        name: string;
+        isDeleted: boolean;
+    }
+
+    export interface Price {
+        currentPrice: number;
+        isIncludedInMenu: boolean;
+        nextPrice?: any;
+        nextIncludedInMenu: boolean;
+        nextDatePrice?: any;
+    }
+
+    export interface SizePrice {
+        sizeId?: any;
+        price: Price;
+    }
+
+    export interface Modifier {
+        id: string;
+        defaultAmount: number;
+        minAmount: number;
+        maxAmount: number;
+        required: boolean;
+        hideIfDefaultAmount: boolean;
+        splittable: boolean;
+        freeOfChargeAmount: number;
+    }
+
+    export interface ChildModifier {
+        id: string;
+        defaultAmount: number;
+        minAmount: number;
+        maxAmount: number;
+        required: boolean;
+        hideIfDefaultAmount: boolean;
+        splittable: boolean;
+        freeOfChargeAmount: number;
+    }
+
+    export interface GroupModifier {
+        id: string;
+        minAmount: number;
+        maxAmount: number;
+        required: boolean;
+        childModifiersHaveMinMaxRestrictions: boolean;
+        childModifiers: ChildModifier[];
+        hideIfDefaultAmount: boolean;
+        defaultAmount: number;
+        splittable: boolean;
+        freeOfChargeAmount: number;
+    }
+
+    export interface Product {
+        fatAmount: number;
+        proteinsAmount: number;
+        carbohydratesAmount: number;
+        energyAmount: number;
+        fatFullAmount: number;
+        proteinsFullAmount: number;
+        carbohydratesFullAmount: number;
+        energyFullAmount: number;
+        weight: number;
+        groupId: string;
+        productCategoryId: string;
+        type: string;
+        orderItemType: string;
+        modifierSchemaId?: any;
+        modifierSchemaName?: any;
+        splittable: boolean;
+        measureUnit: string;
+        sizePrices: SizePrice[];
+        modifiers: Modifier[];
+        groupModifiers: GroupModifier[];
+        imageLinks: string[];
+        doNotPrintInCheque: boolean;
+        parentGroup: string;
+        order: number;
+        fullNameEnglish: string;
+        useBalanceForSell: boolean;
+        canSetOpenPrice: boolean;
+        id: string;
+        code: string;
+        name: string;
+        description: string;
+        additionalInfo?: any;
+        tags: any[];
+        isDeleted: boolean;
+        seoDescription: string;
+        seoText?: any;
+        seoKeywords?: any;
+        seoTitle?: any;
+    }
+
+    export interface RootObject {
+        correlationId: string;
+        groups: Group[];
+        productCategories: ProductCategory[];
+        products: Product[];
+        sizes: any[];
+        revision: number;
+    }
 }

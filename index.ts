@@ -1,3 +1,4 @@
+import { database } from "./config/database";
 import bodyParser from 'body-parser';
 import express from 'express';
 import routes from './routes';
@@ -11,4 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 routes(app);
 
-app.listen(3000, () => console.log(`Server listening on port 3000`))
+(async () => {
+    await database.loadAll();
+
+    app.listen(3000, () => console.log(`Server listening on port 3000`))
+})()

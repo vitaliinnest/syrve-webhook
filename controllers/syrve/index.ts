@@ -1,6 +1,6 @@
-import { IDeliveryCreatePayload, ITildaProduct } from "../../types";
+import { findStreet, prepareItems, to } from "../../modules";
+import { IDeliveryCreatePayload } from "../../types";
 import { Request, Response } from "express";
-import { to } from "../../modules";
 
 import syrveApi from "../../modules/SyrveApi";
 import config from "../../config";
@@ -24,19 +24,19 @@ const webhook = async (req: Request, res: Response) => {
 
     const delivery = type === "one_click" ? oneClickOrder(phone) : await fullOrder(req.body);
 
-    const [ error, result ] = await to(syrveApi.create_delivery(delivery));
+    // const [ error, result ] = await to(syrveApi.create_delivery(delivery));
+    //
+    // if(error) {
+    //     console.error(error)
+    //
+    //     return res.send( { success: false, error })
+    // }
+    //
+    // console.log(JSON.stringify(delivery, null, 2))
+    //
+    // console.log(JSON.stringify(result, null, 2))
 
-    if(error) {
-        console.error(error)
-
-        return res.send( { success: false, error })
-    }
-
-    console.log(JSON.stringify(delivery, null, 2))
-
-    console.log(JSON.stringify(result, null, 2))
-
-    res.send(result)
+    res.send(delivery)
 }
 
 
@@ -57,7 +57,7 @@ function oneClickOrder(phone: string): IDeliveryCreatePayload {
                 }
             },
             customer: {
-                name: "| NEW | ЗАКАЗ В ОДИН КЛИК | NEW |",
+                name: "Новый гость",
                 type: 'one-time'
             },
             payments: [],
@@ -74,42 +74,38 @@ function oneClickOrder(phone: string): IDeliveryCreatePayload {
 }
 
 async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
-    const { lang = "RU", name = "", phone = "", deliveryvar = "", dstreet = "", dcity = "Харьков", dhouse = "00", dapt = "", comment = "", paymentsystem = "cash", payment = { amount: 0, products: [] } } = body;
+    const { name = "", phone = "", deliveryvar = "", dstreet = "", dcity = "Харьков", dhouse = "00", dapt = "", comment = "", paymentsystem = "cash", payment = { amount: 0, products: [] } } = body;
 
-    const productIds = await syrveApi.products(payment.products);
+    const address = `${[dcity, dstreet, dhouse, dapt].filter(Boolean).join(', ')}`;
+    const paymentType = paymentsystem === "cash" ? "наличными" : "картой";
 
-    const products = payment.products.reduce((array: any, row: ITildaProduct) => {
-        if(productIds[row.sku] && productIds[row.sku].id) {
-            array.push({ productId: productIds[row.sku].id, modifiers: productIds[row.sku].modifiers.map((row: any) => ({ productId: row.id, productGroupId: row.productGroupId, amount: 1 })), type: 'Product', amount: +row.quantity })
-        }
+    const isDelivery = ['Доставка по адресу', 'Доставка за адресою'].some((item) => deliveryvar.includes(item));
 
-        return array;
-    }, []);
+    const items: any = prepareItems(payment.products, isDelivery);
+    const street: string = findStreet(dstreet);
 
-    const street = await syrveApi.street(lang, dstreet);
+    const deliveryPoint = isDelivery ? {
+        address: {
+            street: {
+                city: dcity,
+                id: street
+            },
+            house: dhouse,
+            flat: dapt
+        },
+        comment: `| NEW | ${deliveryvar} | NEW |\n${address}\nОплата: ${paymentType}`
+    } : {};
 
     return {
         organizationId: config.SYRVE.organizationId,
         terminalGroupId: config.SYRVE.terminalGroupId,
         order: {
-            orderTypeId: deliveryvar.includes('Доставка по адресу') || deliveryvar.includes('Доставка за адресою') ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
             phone,
-            comment: comment ? `| NEW | ${comment} | NEW |` : "",
-            customer: {
-                name,
-                type: "one-time"
-            },
-            deliveryPoint: {
-                address: {
-                    street: {
-                        city: dcity,
-                        id: street
-                    },
-                    house: dhouse,
-                    flat: dapt
-                },
-                comment: `| NEW | ${deliveryvar} | NEW |\n${[dcity, dstreet, dhouse, dapt].filter(Boolean).join(', ')}\nОплата: ${ paymentsystem === "cash" ? "Cash" : "Card" }`
-            },
+            items,
+            deliveryPoint,
+            orderTypeId: isDelivery ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
+            comment: `| NEW | Комментарий клиента: ${comment} | Доставка: ${address} | Оплата: ${paymentType} | NEW |`,
+            customer: { name, type: "one-time" },
             payments: [
                 {
                     paymentTypeKind: "Card",
@@ -117,7 +113,6 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
                     paymentTypeId: config.SYRVE.payments.card
                 }
             ],
-            items: products
         }
     }
 }
