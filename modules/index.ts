@@ -16,7 +16,7 @@ export const findStreet = (name: string): string => {
     return config.SYRVE.streets.undefined;
 }
 
-export const prepareItems = (products: ITildaProduct[], isDelivery: boolean): IDeliveryItem[] => {
+export const prepareItems = (products: ITildaProduct[], isDelivery: boolean, amount: number): IDeliveryItem[] => {
     const nomenclature: ISyrveNomenclatureSpace.RootObject = database.get('nomenclature');
 
     const items = products.reduce((array: IDeliveryItem[], product) => {
@@ -79,7 +79,7 @@ export const prepareItems = (products: ITildaProduct[], isDelivery: boolean): ID
         return array;
     }, []);
 
-    if (isDelivery) items.push({
+    if (isDelivery && Number(amount) < 349) items.push({
         productId: config.SYRVE.products.delivery,
         type: "Product",
         amount: 1

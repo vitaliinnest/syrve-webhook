@@ -81,7 +81,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
 
     const isDelivery = ['Доставка по адресу', 'Доставка за адресою'].some((item) => deliveryvar.includes(item));
 
-    const items: any = prepareItems(payment.products, isDelivery);
+    const items: any = prepareItems(payment.products, isDelivery, payment.amount);
     const street: string = findStreet(dstreet);
 
     const deliveryPoint = isDelivery ? {
