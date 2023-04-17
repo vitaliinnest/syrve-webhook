@@ -21,9 +21,9 @@ class SyrveApi {
 
     async access_token() {
         const [ error, response = {} ] = await to(axios.post(`https://api-eu.iiko.services/api/1/access_token`, { apiLogin: config.SYRVE.apiLogin }));
-        if(error) console.error(error);
+        if (error) console.error(error);
 
-        if(response.data.token) this.axios.defaults.headers['Authorization'] = `Bearer ${response.data.token}`;
+        if (response.data?.token) this.axios.defaults.headers['Authorization'] = `Bearer ${response.data.token}`;
     }
 
     async create_delivery(payload: IDeliveryCreatePayload): Promise<any> {
