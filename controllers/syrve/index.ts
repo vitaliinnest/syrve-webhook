@@ -46,7 +46,7 @@ function oneClickOrder(phone: string): IDeliveryCreatePayload {
         terminalGroupId: config.SYRVE.terminalGroupId,
         order: {
             phone,
-            comment: "| NEW | ЗАКАЗ В ОДИН КЛИК | NEW |",
+            comment: "ЗАКАЗ В ОДИН КЛИК",
             orderTypeId: config.SYRVE.order_types.deliveryByCourier,
             deliveryPoint: {
                 address: {
@@ -93,7 +93,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
             house: dhouse,
             flat: dapt
         },
-        comment: `| NEW | ${deliveryvar} | NEW |\n${address}\nОплата: ${paymentType}`
+        comment: `${deliveryvar} \n${address}\nОплата: ${paymentType}`
     } : {};
 
     return {
@@ -104,7 +104,7 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
             items,
             deliveryPoint,
             orderTypeId: isDelivery ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
-            comment: `| NEW | Комментарий клиента: ${comment} | Доставка: ${address} | Оплата: ${paymentType} | NEW |`,
+            comment: `Комментарий клиента: ${comment} | Доставка: ${address} | Оплата: ${paymentType}`,
             customer: { name, type: "one-time" },
             payments: [
                 {
