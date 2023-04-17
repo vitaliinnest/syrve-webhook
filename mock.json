@@ -1,5 +1,10 @@
 [
-  {"one_click":"+380 (99) 999-99-99","mark":"website","tranid":"2499817:3849042451","formid":"form203237500"},
+  {
+    "one_click": "+380 (99) 999-99-99",
+    "mark": "website",
+    "tranid": "2499817:3849042451",
+    "formid": "form203237500"
+  },
   {
     "name": "Руслан",
     "mark": "website",
@@ -263,5 +268,74 @@
     "utm_medium": "cpc",
     "utm_campaign": "+cheese +pizza",
     "utm_content": "608122329353"
+  },
+  {
+    "name": "Руслан",
+    "mark": "website",
+    "lang": "RU",
+    "phone": "+380 (99) 294-64-39",
+    "deliveryvar": "Доставка по адресу = 69",
+    "dcity": "Харьков",
+    "dstreet": "Копыловская ул.",
+    "dhouse": "20А",
+    "paymentsystem": "banktransfer",
+    "payment": {
+      "orderid": "1571786867",
+      "products": [
+        {
+          "name": "Салат с брюшком лосося",
+          "price": 199,
+          "img": "https://static.tildacdn.com/stor3230-6232-4862-b437-663762383839/17962817.jpg",
+          "recid": "194695608",
+          "lid": "153544994291",
+          "pack_label": "lwh",
+          "pack_m": "320",
+          "pack_x": "0",
+          "pack_y": "0",
+          "pack_z": "0",
+          "part_uids": ["185523660851"],
+          "gen_uid": "153544994291",
+          "url": "https://chizpizza.kh.ua/tproduct/194695608-153544994291-salat-s-bryushkom-lososya",
+          "sku": "432442360142_RUS",
+          "uid": "153544994291",
+          "quantity": 1,
+          "amount": 199,
+          "ts": 1677957730
+        },
+        {
+          "name": "Салат с фунчезой",
+          "price": 219,
+          "img": "https://static.tildacdn.com/stor3537-3465-4339-b333-353439373665/75789523.jpg",
+          "recid": "194695608",
+          "lid": "502583164981",
+          "pack_label": "lwh",
+          "pack_m": "320",
+          "pack_x": "0",
+          "pack_y": "0",
+          "pack_z": "0",
+          "part_uids": ["185523660851"],
+          "gen_uid": "502583164981",
+          "url": "https://chizpizza.kh.ua/tproduct/194695608-502583164981-salat-s-funchezoi",
+          "sku": "432442360149_RUS",
+          "uid": "502583164981",
+          "quantity": 1,
+          "amount": 219,
+          "ts": 1677957728
+        }
+      ],
+      "amount": "936",
+      "subtotal": "936",
+      "delivery": "Доставка по адресу",
+      "delivery_price": "69",
+      "delivery_fio": "",
+      "delivery_address": "",
+      "delivery_comment": ""
+    },
+    "formid": "form195630154",
+    "formname": "Cart",
+    "utm_source": "google",
+    "utm_medium": "cpc",
+    "utm_campaign": "+pizza +bella",
+    "utm_content": "624813712499"
   }
 ]
