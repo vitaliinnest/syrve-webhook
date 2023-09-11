@@ -53,8 +53,8 @@ export const prepareItems = (order: WoocommerceOrder, freeDelivery: boolean): {
                 }).flat();
 
                 deliveryItem.modifiers = product.meta_data.reduce((array: any[], { key, value }) => {
-                    if (Array.isArray(value)) return array;
-                    const { bestMatch } = stringSimilarity.findBestMatch(value as string, modifiers.map((row) => row.name));
+                    if (Array.isArray(value) || value === '') return array;
+                    const { bestMatch } = stringSimilarity.findBestMatch(value, modifiers.map((row) => row.name));
                     if (!bestMatch.target) return array;
 
                     const modifier = modifiers.find((x) => x.name === bestMatch.target);
