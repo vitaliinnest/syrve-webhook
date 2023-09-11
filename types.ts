@@ -18,7 +18,7 @@ export interface ITildaOrder {
 
 export interface Payment {
     orderid: string;
-    products?: (ProductsEntity)[] | null;
+    products?: ProductsEntity[] | null;
     amount: string;
     subtotal: string;
     delivery: string;
@@ -34,25 +34,31 @@ export interface ProductsEntity {
     amount: string;
     price: string;
     sku: string;
-    options?: ({
-        option: string;
-        variant: string;
-    })[] | null;
+    options?:
+        | {
+              option: string;
+              variant: string;
+          }[]
+        | null;
 }
 
 export interface ISyrveAccessToken {
     correlationId: string;
-    token: string
+    token: string;
 }
 
 export interface ISyrveOrganizations {
     correlationId: string;
-    organizations?: ({
-        responseType: string;
-        id: string;
-        name: string;
-    })[] | null;
+    organizations?:
+        | {
+              responseType: string;
+              id: string;
+              name: string;
+          }[]
+        | null;
 }
+
+export type PaymentTypeKind = "Cash" | "Card";
 
 export interface IDeliveryCreatePayload {
     organizationId: string;
@@ -69,21 +75,23 @@ export interface IDeliveryCreatePayload {
                 };
                 house: string;
                 flat?: string;
-            }
+            };
             comment?: string;
-        }
+        };
         comment?: string;
         customer: {
             name: string;
-            type: 'one-time'
+            type: "one-time";
         };
-        payments: {
-            paymentTypeKind: "Cash" | "Card"
-            sum: number;
-            paymentTypeId: string;
-        }[] | [];
+        payments:
+            | {
+                  paymentTypeKind: PaymentTypeKind;
+                  sum: number;
+                  paymentTypeId: string;
+              }[]
+            | [];
         items: IDeliveryItem[];
-    }
+    };
 }
 
 export interface IDeliveryItem {
@@ -107,7 +115,7 @@ export interface ITildaProduct {
     amount: string;
     price: string;
     sku: string;
-    options?: (OptionsEntity)[] | null;
+    options?: OptionsEntity[] | null;
 }
 export interface OptionsEntity {
     option: string;
@@ -238,4 +246,184 @@ export namespace ISyrveNomenclatureSpace {
         sizes: any[];
         revision: number;
     }
+}
+
+
+export interface WoocommerceOrder {
+    id:                   number;
+    parent_id:            number;
+    status:               string;
+    currency:             string;
+    version:              string;
+    prices_include_tax:   boolean;
+    date_created:         Date;
+    date_modified:        Date;
+    discount_total:       string;
+    discount_tax:         string;
+    shipping_total:       string;
+    shipping_tax:         string;
+    cart_tax:             string;
+    total:                string;
+    total_tax:            string;
+    customer_id:          number;
+    order_key:            string;
+    billing:              WoocommerceBilling;
+    shipping:             WoocommerceBilling;
+    payment_method:       "cod" | "cheque" | "liqpay" | "liqpay-webplus";
+    payment_method_title: string;
+    transaction_id:       string;
+    customer_ip_address:  string;
+    customer_user_agent:  string;
+    created_via:          string;
+    customer_note:        string;
+    date_completed:       null;
+    date_paid:            null;
+    cart_hash:            string;
+    number:               string;
+    meta_data:            AddressItem[];
+    line_items:           WoocommerceProduct[];
+    tax_lines:            any[];
+    shipping_lines:       ShippingLine[];
+    fee_lines:            any[];
+    coupon_lines:         any[];
+    refunds:              any[];
+    payment_url:          string;
+    is_editable:          boolean;
+    needs_payment:        boolean;
+    needs_processing:     boolean;
+    date_created_gmt:     Date;
+    date_modified_gmt:    Date;
+    date_completed_gmt:   null;
+    date_paid_gmt:        null;
+    lang:                 string;
+    currency_symbol:      string;
+    _links:               Links;
+}
+
+export interface Links {
+    self:       Collection[];
+    collection: Collection[];
+    customer:   Collection[];
+}
+
+export interface Collection {
+    href: string;
+}
+
+export interface WoocommerceBilling {
+    first_name: string;
+    last_name:  string;
+    company:    string;
+    address_1:  string;
+    address_2:  string;
+    city:       string;
+    state:      string;
+    postcode:   string;
+    country:    string;
+    email?:     string;
+    phone:      string;
+}
+
+export interface WoocommerceProduct {
+    id:           number;
+    name:         string;
+    product_id:   number;
+    variation_id: number;
+    quantity:     number;
+    tax_class:    string;
+    subtotal:     string;
+    subtotal_tax: string;
+    total:        string;
+    total_tax:    string;
+    taxes:        any[];
+    meta_data:    WoocommerceProductMetadata[];
+    sku:          string;
+    price:        number;
+    image:        Image;
+    parent_name:  string;
+}
+
+export interface Image {
+    id:  number;
+    src: string;
+}
+
+export interface WoocommerceProductMetadata {
+    id:            number;
+    key:           string;
+    value:         DisplayValueElement[] | string;
+    display_key:   string;
+    display_value: DisplayValueElement[] | string;
+}
+
+export interface DisplayValueElement {
+    type:            string;
+    name:            string;
+    label:           string;
+    value:           PurpleValue[];
+    is_fee:          boolean;
+    is_show_price:   boolean;
+    price:           boolean;
+    quantity_depend: boolean;
+    cur_swit:        number;
+    form_data:       FormData;
+    meta_id:         number;
+}
+
+export interface FormData {
+    type:         string;
+    elementId:    string;
+    label:        string;
+    priceOptions: string;
+    pricingType:  string;
+    name:         string;
+    enableCl:     boolean;
+    cl_rule:      string;
+    cl_val:       string;
+    col:          number;
+    form_id:      number;
+    form_rules:   FormRules;
+    cl_status:    string;
+}
+
+export interface FormRules {
+    pric_cal_option_once:    boolean;
+    exclude_from_discount:   boolean;
+    pric_use_as_fee:         boolean;
+    fee_label:               string;
+    render_after_acb:        boolean;
+    disp_hide_options_price: boolean;
+}
+
+export interface PurpleValue {
+    i:     number;
+    value: string;
+    label: string;
+}
+
+export type OrderAddressKey = "d_house" | "d_paradnoe" | "d_room" | "d_etaj";
+
+export interface AddressItem {
+    id:    number;
+    key:   OrderAddressKey;
+    value: string;
+}
+
+export interface ShippingLine {
+    id:           number;
+    method_title: string;
+    method_id:    "local_pickup" | "flat_rate" | "free_shipping";
+    instance_id:  string;
+    total:        string;
+    total_tax:    string;
+    taxes:        any[];
+    meta_data:    ShippingLineMetaDatum[];
+}
+
+export interface ShippingLineMetaDatum {
+    id:            number;
+    key:           string;
+    value:         string;
+    display_key:   string;
+    display_value: string;
 }

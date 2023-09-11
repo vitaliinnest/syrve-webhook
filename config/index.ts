@@ -61,7 +61,7 @@ const config: IConfig = {
         payments: {
             bonus: "05828912-c15e-4e6d-a5f7-09e551d809d7",
             card: "9cd5d67a-89b4-ab69-1365-7b8c51865a90",
-            cash: "3a091e19-38e9-47ed-88b2-728c4b0bfbf8"
+            cash: "09322f46-578a-d210-add7-eec222a08871"
         }
     }
 };

@@ -321,6 +321,26 @@
           "quantity": 1,
           "amount": 219,
           "ts": 1677957728
+        },
+        {
+          "name": "Греческий салат",
+          "price": 219,
+          "img": "https://static.tildacdn.com/stor3537-3465-4339-b333-353439373665/75789523.jpg",
+          "recid": "194695608",
+          "lid": "502583164981",
+          "pack_label": "lwh",
+          "pack_m": "320",
+          "pack_x": "0",
+          "pack_y": "0",
+          "pack_z": "0",
+          "part_uids": ["185523660851"],
+          "gen_uid": "502583164981",
+          "url": "https://chizpizza.kh.ua/tproduct/194695608-502583164981-salat-s-funchezoi",
+          "sku": "4324423575_RUS",
+          "uid": "502583164981",
+          "quantity": 1,
+          "amount": 219,
+          "ts": 1677957728
         }
       ],
       "amount": "936",

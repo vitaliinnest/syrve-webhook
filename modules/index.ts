@@ -1,4 +1,4 @@
-import { IDeliveryItem, ISyrveNomenclatureSpace, ITildaProduct } from "../types";
+import { IDeliveryItem, ISyrveNomenclatureSpace, WoocommerceOrder, WoocommerceProduct } from "../types";
 import { database } from "../config/database";
 
 import stringSimilarity = require("string-similarity");
@@ -16,18 +16,24 @@ export const findStreet = (name: string): string => {
     return config.SYRVE.streets.undefined;
 }
 
-export const prepareItems = (products: ITildaProduct[], isDelivery: boolean, amount: number): IDeliveryItem[] => {
+export const prepareItems = (order: WoocommerceOrder, freeDelivery: boolean): {
+    items: IDeliveryItem[];
+    notFoundItems: WoocommerceProduct[];
+} => {
+    const products = order.line_items;
     const nomenclature: ISyrveNomenclatureSpace.RootObject = database.get('nomenclature');
+    const notFoundItems: WoocommerceProduct[] = [];
 
     const items = products.reduce((array: IDeliveryItem[], product) => {
-        const [ SKU, language ]: any[] = product.sku.split('_');
-        if (!['UKR', 'RUS'].includes(language)) return array;
+        let [ SKU, language ]: any[] = product.sku.split('_');
+        if (!['UKR', 'RUS'].includes(language)) {
+            language = 'RUS';
+        }
 
         const predicates = nomenclature.products.filter((pred) => pred.code.includes(SKU))
 
-        const [ desired ] = predicates.filter((row) => {
+        const [desired] = predicates.filter((row) => {
             const group = nomenclature.groups.find((pred) => pred.id === row.parentGroup);
-
             // @ts-ignore
             return group.parentGroup === config.SYRVE.menu_lang[language];
         })
@@ -37,31 +43,32 @@ export const prepareItems = (products: ITildaProduct[], isDelivery: boolean, amo
                 productId: desired.id,
                 type: 'Product',
                 amount: Number(product.quantity)
-            }
+            };
 
-            if (product.options && product.options.length) {
+            if (product.meta_data.length) {
                 const modifiers = desired.groupModifiers.map(({ childModifiers, id, ...row }: any) => {
-                    childModifiers = childModifiers.map((row: any) => nomenclature.products.find((x) => x.id === row.id))
-                    childModifiers = childModifiers.map((row: any) => ({ ...row, productGroupId: id }))
-
+                    childModifiers = childModifiers.map((row: any) => nomenclature.products.find((x) => x.id === row.id));
+                    childModifiers = childModifiers.map((row: any) => ({ ...row, productGroupId: id }));
                     return childModifiers;
                 }).flat();
 
-                deliveryItem.modifiers = product.options.reduce((array: any[], { variant, quantity = 1 }) => {
-                    const { bestMatch } = stringSimilarity.findBestMatch(variant, modifiers.map((row) => row.name));
+                deliveryItem.modifiers = product.meta_data.reduce((array: any[], { key, value }) => {
+                    if (Array.isArray(value)) return array;
+                    const { bestMatch } = stringSimilarity.findBestMatch(value as string, modifiers.map((row) => row.name));
                     if (!bestMatch.target) return array;
 
                     const modifier = modifiers.find((x) => x.name === bestMatch.target);
 
-                    if (modifier) array.push({
-                        productId: modifier.id,
-                        productGroupId: modifier.productGroupId,
-                        amount: quantity
-                    });
+                    if (modifier) {
+                        array.push({
+                            productId: modifier.id,
+                            productGroupId: modifier.productGroupId,
+                            amount: 1
+                        });
+                    }
 
                     return array;
-                }, [])
-
+                }, []);
 
                 // required modifiers
                 desired.groupModifiers
@@ -71,19 +78,25 @@ export const prepareItems = (products: ITildaProduct[], isDelivery: boolean, amo
                         productGroupId: item.id,
                         productId: item.childModifiers[0].id,
                         amount: 1
-                    }))
+                    }));
             }
 
-            if (!array.find((pred) => pred.productId === desired.id)) array.push(deliveryItem);
+            if (!array.find((pred) => pred.productId === desired.id)) {
+                array.push(deliveryItem);
+            }
+        } else {
+            notFoundItems.push(product);
         }
         return array;
     }, []);
 
-    if (isDelivery && Number(amount) < 349) items.push({
-        productId: config.SYRVE.products.delivery,
-        type: "Product",
-        amount: 1
-    })
+    if (!freeDelivery || items.length === 0 && notFoundItems.length > 0) {
+        items.push({
+            productId: config.SYRVE.products.delivery,
+            type: "Product",
+            amount: 1
+        });
+    }
 
-    return items
+    return { items, notFoundItems };
 }

@@ -1,116 +1,80 @@
-import { findStreet, prepareItems, to } from "../../modules";
-import { IDeliveryCreatePayload } from "../../types";
+import * as modules from "../../modules";
+import {
+    WoocommerceOrder, IDeliveryCreatePayload, PaymentTypeKind, OrderAddressKey
+} from "../../types";
 import { Request, Response } from "express";
-
 import syrveApi from "../../modules/SyrveApi";
 import config from "../../config";
 
 const webhook = async (req: Request, res: Response) => {
-    console.log(JSON.stringify(req.body));
+    console.log(JSON.stringify(req.body, null, 2));
 
-    if(req.body.test) return res.status(200).send({ success: true });
+    if (req.body.test) return res.status(200).send({ success: true });
 
-    const phone = req.body["phone"] || req.body["one_click"];
-    console.log(`Phone: ${phone}`)
+    const delivery = await createDeliveryObject(req.body);
+    const [error, result] = await modules.to(syrveApi.create_delivery(delivery));
 
-    if(!phone) {
-        console.log(`Phone not found in body: `, phone)
-
-        return res.status(200).send({ success: false, error: "Phone not found" });
-    }
-
-    const type = req.body["phone"] ? "full_order" : "one_click";
-    console.log(`Type: ${type}`)
-
-    const delivery = type === "one_click" ? oneClickOrder(phone) : await fullOrder(req.body);
-
-    const [ error, result ] = await to(syrveApi.create_delivery(delivery));
-
-    if(error) {
+    if (error) {
         console.error(error)
-
-        return res.send( { success: false, error })
+        return res.send({ success: false, error })
     }
 
-    console.log(JSON.stringify(delivery, null, 2))
-
-    console.log(JSON.stringify(result, null, 2))
-
+    logData(delivery, result);
     res.send(result)
 }
 
 
-function oneClickOrder(phone: string): IDeliveryCreatePayload {
-    return {
-        organizationId: config.SYRVE.organizationId,
-        terminalGroupId: config.SYRVE.terminalGroupId,
-        order: {
-            phone,
-            comment: "ЗАКАЗ В ОДИН КЛИК",
-            orderTypeId: config.SYRVE.order_types.deliveryByCourier,
-            deliveryPoint: {
-                address: {
-                    street: {
-                        id: "78d6bf50-164e-408e-9638-c0133ea3c320"
-                    },
-                    house: "00"
-                }
-            },
-            customer: {
-                name: "Новый гость",
-                type: 'one-time'
-            },
-            payments: [],
-            items: [
-                {
-                    productId: config.SYRVE.products.one_click,
-                    price: 0,
-                    type: 'Product',
-                    amount: 1
-                }
-            ]
-        }
-    }
+function logData(delivery: IDeliveryCreatePayload, result: any) {
+    console.log("delivery:");
+    console.log(JSON.stringify(delivery, null, 2));
+    console.log("\n");
+
+    console.log("result:");
+    console.log(JSON.stringify(result, null, 2));
 }
 
-async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
-    const { name = "", phone = "", deliveryvar = "", dstreet = "", dcity = "Харьков", dhouse = "00", dapt = "", comment = "", paymentsystem = "cash", payment = { amount: 0, products: [] } } = body;
+async function createDeliveryObject(order: WoocommerceOrder): Promise<IDeliveryCreatePayload> {
+    const toDeliver = isDelivery(order);
+    const freeDelivery = isFreeDelivery(order);
 
-    const address = `${[dcity, dstreet, dhouse, dapt].filter(Boolean).join(', ')}`;
-    const paymentType = paymentsystem === "cash" ? "наличными" : "картой";
-
-    const isDelivery = ['Доставка по адресу', 'Доставка за адресою'].some((item) => deliveryvar.includes(item));
-
-    const items: any = prepareItems(payment.products, isDelivery, payment.amount);
-    const street: string = findStreet(dstreet);
-
-    const deliveryPoint = isDelivery ? {
+    const { items, notFoundItems } = modules.prepareItems(order, freeDelivery);
+    const strNotFoundItems = notFoundItems.map(i => i.name).join(', ');
+    const street = modules.findStreet(order.billing.address_1);
+    
+    const address = getAddress(order);
+    const strAddress = addressToString(address);
+    const deliveryPoint = toDeliver ? {
         address: {
             street: {
-                city: dcity,
+                city: order.billing.city,
                 id: street
             },
-            house: dhouse,
-            flat: dapt
+            house: address.house,
+            entrance: address.entrance,
+            floor: address.floor,
+            flat: address.flat,
         },
-        comment: `${deliveryvar} \n${address}\nОплата: ${paymentType}`
+        comment: `${toDeliver ? "Доставка по адресу" : "Самовывоз"} \n${strAddress} \n${order.payment_method_title}`
     } : {};
 
+    const paymentTypeKind = getPaymentTypeKind(order);
     return {
         organizationId: config.SYRVE.organizationId,
         terminalGroupId: config.SYRVE.terminalGroupId,
         order: {
-            phone,
+            phone: order.billing.phone,
             items,
             deliveryPoint,
-            orderTypeId: isDelivery ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
-            comment: `Комментарий клиента: ${comment} | Доставка: ${address} | Оплата: ${paymentType}`,
-            customer: { name, type: "one-time" },
+            orderTypeId: toDeliver ? config.SYRVE.order_types.deliveryByCourier : config.SYRVE.order_types.deliveryPickUp,
+            comment: `Комментарий клиента: ${order.customer_note} | ${strAddress} | ${order.payment_method_title}${strNotFoundItems.length > 0 ? ` | Не найденные товары: ${strNotFoundItems}` : ''}`,
+            customer: { name: order.billing.first_name, type: "one-time" },
             payments: [
                 {
-                    paymentTypeKind: "Card",
-                    sum: +payment.amount,
-                    paymentTypeId: config.SYRVE.payments.card
+                    paymentTypeKind,
+                    sum: +order.total,
+                    paymentTypeId: paymentTypeKind === "Card"
+                        ? config.SYRVE.payments.card
+                        : config.SYRVE.payments.cash
                 }
             ],
         }
@@ -119,4 +83,64 @@ async function fullOrder(body: any): Promise<IDeliveryCreatePayload> {
 
 export default {
     webhook
+}
+
+type Address = { 
+    street: string;
+    house: string;
+    entrance: string;
+    flat: string;
+    floor: string;
+}
+
+function isDelivery(order: WoocommerceOrder): boolean {
+    if (order.shipping_lines.length > 0) return true;
+    const shippingLine = order.shipping_lines[0];
+    if (shippingLine.method_id === "flat_rate") return true;
+    if (shippingLine.method_id === "free_shipping") return true;
+    if (shippingLine.method_id === "local_pickup") return false;
+    return true;
+}
+
+function isFreeDelivery(order: WoocommerceOrder): boolean {
+    if (!isDelivery(order)) return false;
+    const shippingLine = order.shipping_lines[0];
+    return shippingLine.method_id === "free_shipping";
+}
+
+function getAddress(order: WoocommerceOrder): Address {
+    const street = order.billing.address_1; 
+    const house = getOrderAddressValue("d_house");
+    const entrance = getOrderAddressValue("d_paradnoe");
+    const flat = getOrderAddressValue("d_room");
+    const floor = getOrderAddressValue("d_etaj");
+
+    return {
+        street,
+        house,
+        entrance,
+        flat,
+        floor
+    };
+    
+    function getOrderAddressValue(key: OrderAddressKey): string {
+        return order.meta_data.find(i => i.key === key)?.value ?? "00";
+    }
+}
+
+function getPaymentTypeKind(wcbody: WoocommerceOrder): PaymentTypeKind {
+    switch (wcbody.payment_method) {
+        case "cod":
+            return "Cash";
+        case "cheque":
+        case "liqpay":
+        case "liqpay-webplus":
+            return "Card";
+        default:
+            return "Cash";
+    }
+}
+
+function addressToString(address: Address): string {
+    return `Улица: ${address.street}, Дом: ${address.house}, Подъезд: ${address.entrance}, Квартира: ${address.flat}, Этаж: ${address.floor}`;
 }
