@@ -10,6 +10,7 @@ const webhook = async (req: Request, res: Response) => {
     console.log(JSON.stringify(req.body, null, 2));
 
     if (req.body.test) return res.status(200).send({ success: true });
+    if (req.body.webhook_id) return res.status(200).send({ success: true });
 
     const delivery = await createDeliveryObject(req.body);
     const [error, result] = await modules.to(syrveApi.create_delivery(delivery));
