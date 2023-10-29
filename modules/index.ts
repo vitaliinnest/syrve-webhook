@@ -26,7 +26,7 @@ export const prepareItems = (order: WoocommerceOrder, freeDelivery: boolean): {
 
     const items = products.reduce((array: IDeliveryItem[], product) => {
         let [ SKU, language ]: any[] = product.sku.split('_');
-        if (!['UKR', 'RUS'].includes(language)) {
+        if (language === undefined || !['UKR', 'RUS'].includes(language)) {
             language = order.lang === "uk" ? "UKR" : "RUS";
         }
 
