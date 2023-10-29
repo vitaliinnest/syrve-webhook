@@ -27,7 +27,7 @@ export const prepareItems = (order: WoocommerceOrder, freeDelivery: boolean): {
     const items = products.reduce((array: IDeliveryItem[], product) => {
         let [ SKU, language ]: any[] = product.sku.split('_');
         if (!['UKR', 'RUS'].includes(language)) {
-            language = 'RUS';
+            language = order.lang === "uk" ? "UKR" : "RUS";
         }
 
         const predicates = nomenclature.products.filter((pred) => pred.code.includes(SKU))

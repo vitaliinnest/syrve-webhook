@@ -295,7 +295,7 @@ export interface WoocommerceOrder {
     date_modified_gmt:    Date;
     date_completed_gmt:   null;
     date_paid_gmt:        null;
-    lang:                 string;
+    lang:                 "uk" | "ru";
     currency_symbol:      string;
     _links:               Links;
 }
