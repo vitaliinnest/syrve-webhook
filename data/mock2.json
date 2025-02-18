@@ -1,0 +1,557 @@
+{
+    "id": 12464,
+    "parent_id": 0,
+    "status": "processing",
+    "currency": "UAH",
+    "version": "9.4.3",
+    "prices_include_tax": false,
+    "date_created": "2025-02-18T19:51:22",
+    "date_modified": "2025-02-18T19:51:22",
+    "discount_total": "0",
+    "discount_tax": "0",
+    "shipping_total": "70",
+    "shipping_tax": "0",
+    "cart_tax": "0",
+    "total": "807",
+    "total_tax": "0",
+    "customer_id": 5,
+    "order_key": "wc_order_txUHsU8e3KRgW",
+    "billing": {
+        "first_name": "ТЕСТ",
+        "last_name": "",
+        "company": "",
+        "address_1": "23 Квітня",
+        "address_2": "",
+        "city": "Kharkov",
+        "state": "",
+        "postcode": "",
+        "country": "UA",
+        "email": "admin@admin.com",
+        "phone": "+38(099) 999-99-99"
+    },
+    "shipping": {
+        "first_name": "ТЕСТ",
+        "last_name": "",
+        "company": "",
+        "address_1": "23 Квітня",
+        "address_2": "",
+        "city": "Kharkov",
+        "state": "",
+        "postcode": "",
+        "country": "UA",
+        "phone": ""
+    },
+    "payment_method": "cod",
+    "payment_method_title": "Оплата готівкою",
+    "transaction_id": "",
+    "customer_ip_address": "109.86.217.16",
+    "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
+    "created_via": "checkout",
+    "customer_note": "",
+    "date_completed": null,
+    "date_paid": null,
+    "cart_hash": "0d5f274e22b153a1353ac24e0405ba6a",
+    "number": "12464",
+    "meta_data": [
+        {
+            "id": 309922,
+            "key": "is_vat_exempt",
+            "value": "no"
+        },
+        {
+            "id": 309923,
+            "key": "_wc_order_attribution_source_type",
+            "value": "utm"
+        },
+        {
+            "id": 309924,
+            "key": "_wc_order_attribution_referrer",
+            "value": "https://www.google.com/"
+        },
+        {
+            "id": 309925,
+            "key": "_wc_order_attribution_utm_campaign",
+            "value": "+chizpizza"
+        },
+        {
+            "id": 309926,
+            "key": "_wc_order_attribution_utm_source",
+            "value": "google"
+        },
+        {
+            "id": 309927,
+            "key": "_wc_order_attribution_utm_medium",
+            "value": "cpc"
+        },
+        {
+            "id": 309928,
+            "key": "_wc_order_attribution_utm_content",
+            "value": "608122329353"
+        },
+        {
+            "id": 309929,
+            "key": "_wc_order_attribution_session_entry",
+            "value": "https://chizpizza.kh.ua/?utm_source=google&utm_medium=cpc&utm_campaign=+chizpizza&utm_content=608122329353&gad_source=1&gclid=CjwKCAiAneK8BhAVEiwAoy2HYYts7uLFF9QSuCeTBZ2wOVl3I2BgzzT4J4mEKb3cNXlQpCo0ImjcJRoCHXoQAvD_BwE"
+        },
+        {
+            "id": 309930,
+            "key": "_wc_order_attribution_session_start_time",
+            "value": "2025-01-28 11:39:36"
+        },
+        {
+            "id": 309931,
+            "key": "_wc_order_attribution_session_pages",
+            "value": "4"
+        },
+        {
+            "id": 309932,
+            "key": "_wc_order_attribution_session_count",
+            "value": "2"
+        },
+        {
+            "id": 309933,
+            "key": "_wc_order_attribution_user_agent",
+            "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"
+        },
+        {
+            "id": 309934,
+            "key": "_wc_order_attribution_device_type",
+            "value": "Desktop"
+        }
+    ],
+    "line_items": [
+        {
+            "id": 20775,
+            "name": "Барбекю - 25-сантиметрів",
+            "product_id": 5143,
+            "variation_id": 5144,
+            "quantity": 1,
+            "tax_class": "",
+            "subtotal": "189",
+            "subtotal_tax": "0",
+            "total": "189",
+            "total_tax": "0",
+            "taxes": [],
+            "meta_data": [
+                {
+                    "id": 199282,
+                    "key": "pa_rozmir",
+                    "value": "25-santimetriv",
+                    "display_key": "Розмір",
+                    "display_value": "25-сантиметрів"
+                },
+                {
+                    "id": 199283,
+                    "key": "Тісто",
+                    "value": "Традиційне",
+                    "display_key": "Тісто",
+                    "display_value": "Традиційне"
+                },
+                {
+                    "id": 199284,
+                    "key": "_WCPA_order_meta_data",
+                    "value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681804055200",
+                            "label": "Тісто",
+                            "value": [
+                                {
+                                    "i": 0,
+                                    "value": "Традиційне",
+                                    "label": "Традиційне"
+                                }
+                            ],
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": false,
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681804055200",
+                                "label": "Тісто",
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681804055200",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "61",
+                                "col": 6,
+                                "form_id": 4636,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 199283
+                        }
+                    ],
+                    "display_key": "_WCPA_order_meta_data",
+                    "display_value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681804055200",
+                            "label": "Тісто",
+                            "value": [
+                                {
+                                    "i": 0,
+                                    "value": "Традиційне",
+                                    "label": "Традиційне"
+                                }
+                            ],
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": false,
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681804055200",
+                                "label": "Тісто",
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681804055200",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "61",
+                                "col": 6,
+                                "form_id": 4636,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 199283
+                        }
+                    ]
+                }
+            ],
+            "sku": "967995828_RUS",
+            "price": 189,
+            "image": {
+                "id": 5141,
+                "src": "https://chizpizza.kh.ua/wp-content/uploads/2023/04/95188826.webp"
+            },
+            "parent_name": "Барбекю"
+        },
+        {
+            "id": 20776,
+            "name": "Чіз Мікс - 25-сантиметрів",
+            "product_id": 5081,
+            "variation_id": 5089,
+            "quantity": 1,
+            "tax_class": "",
+            "subtotal": "189",
+            "subtotal_tax": "0",
+            "total": "189",
+            "total_tax": "0",
+            "taxes": [],
+            "meta_data": [
+                {
+                    "id": 199294,
+                    "key": "pa_rozmir",
+                    "value": "25-santimetriv",
+                    "display_key": "Розмір",
+                    "display_value": "25-сантиметрів"
+                },
+                {
+                    "id": 199295,
+                    "key": "Тісто",
+                    "value": "Традиційне",
+                    "display_key": "Тісто",
+                    "display_value": "Традиційне"
+                },
+                {
+                    "id": 199296,
+                    "key": "_WCPA_order_meta_data",
+                    "value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681804055200",
+                            "label": "Тісто",
+                            "value": [
+                                {
+                                    "i": 0,
+                                    "value": "Традиційне",
+                                    "label": "Традиційне"
+                                }
+                            ],
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": false,
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681804055200",
+                                "label": "Тісто",
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681804055200",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "61",
+                                "col": 6,
+                                "form_id": 4636,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 199295
+                        }
+                    ],
+                    "display_key": "_WCPA_order_meta_data",
+                    "display_value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681804055200",
+                            "label": "Тісто",
+                            "value": [
+                                {
+                                    "i": 0,
+                                    "value": "Традиційне",
+                                    "label": "Традиційне"
+                                }
+                            ],
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": false,
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681804055200",
+                                "label": "Тісто",
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681804055200",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "61",
+                                "col": 6,
+                                "form_id": 4636,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 199295
+                        }
+                    ]
+                }
+            ],
+            "sku": "4324423496_RUS",
+            "price": 189,
+            "image": {
+                "id": 5086,
+                "src": "https://chizpizza.kh.ua/wp-content/uploads/2023/04/63432654.jpg"
+            },
+            "parent_name": "Чіз Мікс"
+        },
+        {
+            "id": 20777,
+            "name": "Чіз Мікс - 35-сантиметрів",
+            "product_id": 5081,
+            "variation_id": 5091,
+            "quantity": 1,
+            "tax_class": "",
+            "subtotal": "359",
+            "subtotal_tax": "0",
+            "total": "359",
+            "total_tax": "0",
+            "taxes": [],
+            "meta_data": [
+                {
+                    "id": 199306,
+                    "key": "pa_rozmir",
+                    "value": "35-santimetriv",
+                    "display_key": "Розмір",
+                    "display_value": "35-сантиметрів"
+                },
+                {
+                    "id": 199307,
+                    "key": "Тісто",
+                    "value": "Традиційне (0грн.)",
+                    "display_key": "Тісто",
+                    "display_value": "Традиційне (0грн.)"
+                },
+                {
+                    "id": 199308,
+                    "key": "_WCPA_order_meta_data",
+                    "value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681837448415",
+                            "label": "Тісто",
+                            "value": [
+                                {
+                                    "i": 0,
+                                    "value": "Традиційне",
+                                    "label": "Традиційне"
+                                }
+                            ],
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": [0],
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681837448417",
+                                "label": "Тісто",
+                                "enablePrice": true,
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681837448415",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "63",
+                                "col": 6,
+                                "price": 0,
+                                "form_id": 4636,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 199307
+                        }
+                    ],
+                    "display_key": "_WCPA_order_meta_data",
+                    "display_value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681837448415",
+                            "label": "Тісто",
+                            "value": [
+                                {
+                                    "i": 0,
+                                    "value": "Традиційне",
+                                    "label": "Традиційне"
+                                }
+                            ],
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": [0],
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681837448417",
+                                "label": "Тісто",
+                                "enablePrice": true,
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681837448415",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "63",
+                                "col": 6,
+                                "price": 0,
+                                "form_id": 4636,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 199307
+                        }
+                    ]
+                }
+            ],
+            "sku": "4324423496_RUS",
+            "price": 359,
+            "image": {
+                "id": 5086,
+                "src": "https://chizpizza.kh.ua/wp-content/uploads/2023/04/63432654.jpg"
+            },
+            "parent_name": "Чіз Мікс"
+        }
+    ],
+    "tax_lines": [],
+    "shipping_lines": [
+        {
+            "id": 20778,
+            "method_title": "Доставка за адресою",
+            "method_id": "flat_rate",
+            "instance_id": "2",
+            "total": "70",
+            "total_tax": "0",
+            "taxes": [],
+            "meta_data": [
+                {
+                    "id": 199314,
+                    "key": "Позиції",
+                    "value": "Барбекю - 25-сантиметрів &times; 1, Чіз Мікс - 25-сантиметрів &times; 1, Чіз Мікс - 35-сантиметрів &times; 1",
+                    "display_key": "Позиції",
+                    "display_value": "Барбекю - 25-сантиметрів &times; 1, Чіз Мікс - 25-сантиметрів &times; 1, Чіз Мікс - 35-сантиметрів &times; 1"
+                }
+            ]
+        }
+    ],
+    "fee_lines": [],
+    "coupon_lines": [],
+    "refunds": [],
+    "payment_url": "https://chizpizza.kh.ua/checkout/order-pay/12464/?pay_for_order=true&key=wc_order_txUHsU8e3KRgW",
+    "is_editable": false,
+    "needs_payment": false,
+    "needs_processing": true,
+    "date_created_gmt": "2025-02-18T16:51:22",
+    "date_modified_gmt": "2025-02-18T16:51:22",
+    "date_completed_gmt": null,
+    "date_paid_gmt": null,
+    "lang": "uk",
+    "currency_symbol": "грн.",
+    "_links": {
+        "self": [
+            {
+                "href": "https://chizpizza.kh.ua/wp-json/wc/v3/orders/12464",
+                "targetHints": {
+                    "allow": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://chizpizza.kh.ua/wp-json/wc/v3/orders"
+            }
+        ],
+        "customer": [
+            {
+                "href": "https://chizpizza.kh.ua/wp-json/wc/v3/customers/5"
+            }
+        ]
+    }
+}

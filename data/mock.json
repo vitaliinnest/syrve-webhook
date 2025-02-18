@@ -1,361 +1,223 @@
-[
-  {
-    "one_click": "+380 (11) 111-11-11",
-    "mark": "website",
-    "tranid": "2499817:3849042451",
-    "formid": "form203237500"
-  },
-  {
-    "name": "Руслан ТЕСТ",
-    "mark": "website",
-    "lang": "RU",
-    "phone": "+380 (11) 111-11-11",
-    "deliveryvar": "Доставка по адресу = 69",
-    "dcity": "Харьков",
-    "dstreet": "Копыловская ул.",
-    "dhouse": "20А",
-    "paymentsystem": "banktransfer",
-    "payment": {
-      "orderid": "1571786867",
-      "products": [
-        {
-          "name": "Четыре Сезона",
-          "quantity": "1",
-          "amount": "259",
-          "price": "259",
-          "sku": "967995813_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "35-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        },
-        {
-          "name": "Мексиканская",
-          "quantity": "1",
-          "amount": "279",
-          "price": "279",
-          "sku": "967995852_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "35-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        },
-        {
-          "name": "Мясная",
-          "quantity": "1",
-          "amount": "249",
-          "price": "249",
-          "sku": "967995856_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "35-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        },
-        {
-          "name": "Супер мясная",
-          "quantity": "1",
-          "amount": "149",
-          "price": "149",
-          "sku": "967995872_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "25-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        }
-      ],
-      "amount": "936",
-      "subtotal": "936",
-      "delivery": "Доставка по адресу",
-      "delivery_price": "69",
-      "delivery_fio": "",
-      "delivery_address": "",
-      "delivery_comment": ""
+{
+    "id": 5595,
+    "parent_id": 0,
+    "status": "processing",
+    "currency": "UAH",
+    "version": "7.6.1",
+    "prices_include_tax": false,
+    "date_created": "2023-05-03T22:16:14",
+    "date_modified": "2023-05-03T22:16:14",
+    "discount_total": "0",
+    "discount_tax": "0",
+    "shipping_total": "89",
+    "shipping_tax": "0",
+    "cart_tax": "0",
+    "total": "218",
+    "total_tax": "0",
+    "customer_id": 0,
+    "order_key": "wc_order_HjYmBBFpo4mjD",
+    "billing": {
+        "first_name": "тест",
+        "last_name": "",
+        "company": "",
+        "address_1": "тест",
+        "address_2": "тест",
+        "city": "Харьков",
+        "state": "",
+        "postcode": "",
+        "country": "UA",
+        "email": "",
+        "phone": "+380 (99) 999-99-99"
     },
-    "formid": "form195630154",
-    "formname": "Cart",
-    "utm_source": "google",
-    "utm_medium": "cpc",
-    "utm_campaign": "+pizza +bella",
-    "utm_content": "624813712499"
-  },
-  {
-    "name": "Дмитрий ТЕСТ",
-    "mark": "website",
-    "lang": "RU",
-    "phone": "+380 (11) 111-11-11",
-    "deliveryvar": "Самовывоз (скидка 15%) ул. Маршала Батицкого 9",
-    "dcity": "Харьков",
-    "paymentsystem": "cash",
-    "payment": {
-      "orderid": "1493689038",
-      "products": [
-        {
-          "name": "Гавайская",
-          "quantity": "1",
-          "amount": "149",
-          "price": "149",
-          "sku": "967995840_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "25-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        },
-        {
-          "name": "Сет &quot;Для Большой Компании&quot;",
-          "quantity": "1",
-          "amount": "1729",
-          "price": "1729",
-          "sku": "4324423430_RUS"
-        },
-        {
-          "name": "Супер мясная",
-          "quantity": "1",
-          "amount": "269",
-          "price": "269",
-          "sku": "967995872_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "35-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        },
-        {
-          "name": "Гавайская",
-          "quantity": "1",
-          "amount": "259",
-          "price": "259",
-          "sku": "967995840_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "35-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        },
-        {
-          "name": "Пеперони",
-          "quantity": "1",
-          "amount": "269",
-          "price": "269",
-          "sku": "967995868_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "35-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        }
-      ],
-      "amount": "2675",
-      "subtotal": "2675",
-      "delivery": "Самовывоз (скидка 15%) ул. Маршала Батицкого 9",
-      "delivery_price": "0",
-      "delivery_fio": "",
-      "delivery_address": "",
-      "delivery_comment": ""
+    "shipping": {
+        "first_name": "тест",
+        "last_name": "",
+        "company": "",
+        "address_1": "тест",
+        "address_2": "тест",
+        "city": "Харьков",
+        "state": "",
+        "postcode": "",
+        "country": "UA",
+        "phone": ""
     },
-    "formid": "form195630154",
-    "formname": "Cart",
-    "utm_source": "google",
-    "utm_medium": "cpc",
-    "utm_campaign": "+чиз +пицца",
-    "utm_content": "608122329353"
-  },
-  {
-    "name": "Олексій ТЕСТ",
-    "mark": "website",
-    "lang": "RU",
-    "phone": "+380 (11) 111-11-11",
-    "deliveryvar": "Доставка по адресу = 69",
-    "dcity": "Харьков",
-    "dstreet": "Юрия Гагарина пр.",
-    "dhouse": "41/2",
-    "dapt": "200",
-    "comment": "Підїзд 6",
-    "paymentsystem": "cash",
-    "payment": {
-      "orderid": "1234080548",
-      "products": [
+    "payment_method": "cod",
+    "payment_method_title": "Оплата наличными",
+    "transaction_id": "",
+    "customer_ip_address": "46.160.91.33",
+    "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+    "created_via": "checkout",
+    "customer_note": "",
+    "date_completed": null,
+    "date_paid": null,
+    "cart_hash": "b33b280aa517bde731a40c7da2e59dde",
+    "number": "5595",
+    "meta_data": [
         {
-          "name": "Барбекю",
-          "quantity": "2",
-          "amount": "298",
-          "price": "149",
-          "sku": "967995828_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "25-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
-        },
-        {
-          "name": "Мясная",
-          "quantity": "1",
-          "amount": "139",
-          "price": "139",
-          "sku": "967995856_RUS",
-          "options": [
-            {
-              "option": "Размер",
-              "variant": "25-сантиметров"
-            },
-            {
-              "option": "Тесто",
-              "variant": "Традиционное"
-            }
-          ]
+            "id": 70110,
+            "key": "is_vat_exempt",
+            "value": "no"
         }
-      ],
-      "amount": "437",
-      "subtotal": "437",
-      "delivery": "Доставка по адресу",
-      "delivery_price": "69",
-      "delivery_fio": "",
-      "delivery_address": "",
-      "delivery_comment": ""
-    },
-    "formid": "form195630154",
-    "formname": "Cart",
-    "utm_source": "google",
-    "utm_medium": "cpc",
-    "utm_campaign": "+cheese +pizza",
-    "utm_content": "608122329353"
-  },
-  {
-    "name": "Руслан ТЕСТ",
-    "mark": "website",
-    "lang": "RU",
-    "phone": "+380 (11) 111-11-11",
-    "deliveryvar": "Доставка по адресу = 69",
-    "dcity": "Харьков",
-    "dstreet": "Копыловская ул.",
-    "dhouse": "20А",
-    "paymentsystem": "banktransfer",
-    "payment": {
-      "orderid": "1571786867",
-      "products": [
+    ],
+    "line_items": [
         {
-          "name": "Салат с брюшком лосося",
-          "price": 199,
-          "img": "https://static.tildacdn.com/stor3230-6232-4862-b437-663762383839/17962817.jpg",
-          "recid": "194695608",
-          "lid": "153544994291",
-          "pack_label": "lwh",
-          "pack_m": "320",
-          "pack_x": "0",
-          "pack_y": "0",
-          "pack_z": "0",
-          "part_uids": ["185523660851"],
-          "gen_uid": "153544994291",
-          "url": "https://chizpizza.kh.ua/tproduct/194695608-153544994291-salat-s-bryushkom-lososya",
-          "sku": "432442360142_RUS",
-          "uid": "153544994291",
-          "quantity": 1,
-          "amount": 199,
-          "ts": 1677957730
-        },
-        {
-          "name": "Салат с фунчезой",
-          "price": 219,
-          "img": "https://static.tildacdn.com/stor3537-3465-4339-b333-353439373665/75789523.jpg",
-          "recid": "194695608",
-          "lid": "502583164981",
-          "pack_label": "lwh",
-          "pack_m": "320",
-          "pack_x": "0",
-          "pack_y": "0",
-          "pack_z": "0",
-          "part_uids": ["185523660851"],
-          "gen_uid": "502583164981",
-          "url": "https://chizpizza.kh.ua/tproduct/194695608-502583164981-salat-s-funchezoi",
-          "sku": "432442360149_RUS",
-          "uid": "502583164981",
-          "quantity": 1,
-          "amount": 219,
-          "ts": 1677957728
-        },
-        {
-          "name": "Греческий салат",
-          "price": 219,
-          "img": "https://static.tildacdn.com/stor3537-3465-4339-b333-353439373665/75789523.jpg",
-          "recid": "194695608",
-          "lid": "502583164981",
-          "pack_label": "lwh",
-          "pack_m": "320",
-          "pack_x": "0",
-          "pack_y": "0",
-          "pack_z": "0",
-          "part_uids": ["185523660851"],
-          "gen_uid": "502583164981",
-          "url": "https://chizpizza.kh.ua/tproduct/194695608-502583164981-salat-s-funchezoi",
-          "sku": "4324423575_RUS",
-          "uid": "502583164981",
-          "quantity": 1,
-          "amount": 219,
-          "ts": 1677957728
+            "id": 250,
+            "name": "Ветчина и Грибы - 25-сантиметров",
+            "product_id": 5352,
+            "variation_id": 5353,
+            "quantity": 1,
+            "tax_class": "",
+            "subtotal": "129",
+            "subtotal_tax": "0",
+            "total": "129",
+            "total_tax": "0",
+            "taxes": [],
+            "meta_data": [
+                {
+                    "id": 2252,
+                    "key": "pa_rozmir",
+                    "value": "25-santimetrov",
+                    "display_key": "Размер",
+                    "display_value": "25-сантиметров"
+                },
+                {
+                    "id": 2253,
+                    "key": "Тесто:",
+                    "value": "Традиционное",
+                    "display_key": "Тесто",
+                    "display_value": "Традиционное"
+                },
+                {
+                    "id": 2254,
+                    "key": "_WCPA_order_meta_data",
+                    "value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681804055200",
+                            "label": "Тесто",
+                            "value": [
+                                {
+                                    "i": 0,
+                                    "value": "Традиционное",
+                                    "label": "Традиционное"
+                                }
+                            ],
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": false,
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681804055200",
+                                "label": "Тесто:",
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681804055200",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "61",
+                                "col": 6,
+                                "form_id": 5555,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 2253
+                        }
+                    ],
+                    "display_key": "_WCPA_order_meta_data",
+                    "display_value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681804055200",
+                            "label": "Тесто",
+                            "value": [
+                                {
+                                    "i": 0,
+                                    "value": "Традиционное",
+                                    "label": "Традиционное"
+                                }
+                            ],
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": false,
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681804055200",
+                                "label": "Тесто",
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681804055200",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "61",
+                                "col": 6,
+                                "form_id": 5555,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 2253
+                        }
+                    ]
+                }
+            ],
+            "sku": "967995832_UKR",
+            "price": 129,
+            "image": {
+                "id": 5140,
+                "src": "https://pizza.ikpuba.website/wp-content/uploads/2023/04/92804571.webp"
+            },
+            "parent_name": "Ветчина и Грибы"
         }
-      ],
-      "amount": "936",
-      "subtotal": "936",
-      "delivery": "Доставка по адресу",
-      "delivery_price": "69",
-      "delivery_fio": "",
-      "delivery_address": "",
-      "delivery_comment": ""
-    },
-    "formid": "form195630154",
-    "formname": "Cart",
-    "utm_source": "google",
-    "utm_medium": "cpc",
-    "utm_campaign": "+pizza +bella",
-    "utm_content": "624813712499"
-  }
-]
+    ],
+    "tax_lines": [],
+    "shipping_lines": [
+        {
+            "id": 251,
+            "method_title": "Доставка по адресу",
+            "method_id": "flat_rate",
+            "instance_id": "2",
+            "total": "89",
+            "total_tax": "0",
+            "taxes": [],
+            "meta_data": [
+                {
+                    "id": 2260,
+                    "key": "Товары",
+                    "value": "Ветчина и Грибы - 25-сантиметров × 1",
+                    "display_key": "Товары",
+                    "display_value": "Ветчина и Грибы - 25-сантиметров × 1"
+                }
+            ]
+        }
+    ],
+    "fee_lines": [],
+    "coupon_lines": [],
+    "refunds": [],
+    "payment_url": "https://pizza.ikpuba.website/checkout/order-pay/5595/?pay_for_order=true&key=wc_order_HjYmBBFpo4mjD",
+    "is_editable": false,
+    "needs_payment": false,
+    "needs_processing": true,
+    "date_created_gmt": "2023-05-03T19:16:14",
+    "date_modified_gmt": "2023-05-03T19:16:14",
+    "date_completed_gmt": null,
+    "date_paid_gmt": null,
+    "lang": "ru",
+    "currency_symbol": "грн."
+}
