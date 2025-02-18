@@ -1,8 +1,8 @@
 import { database } from "./config/database";
-import bodyParser from 'body-parser';
-import express from 'express';
-import routes from './routes';
-import cors from 'cors';
+import bodyParser from "body-parser";
+import express from "express";
+import routes from "./routes";
+import cors from "cors";
 
 const app = express();
 
@@ -15,5 +15,5 @@ routes(app);
 (async () => {
     await database.loadAll();
 
-    app.listen(3000, () => console.log(`Server listening on port 3000`))
+    app.listen(3000, () => console.log(`Server listening on port 3000`));
 })();
