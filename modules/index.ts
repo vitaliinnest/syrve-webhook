@@ -58,7 +58,8 @@ export const prepareItems = (order: WoocommerceOrder, freeDelivery: boolean): {
                     if (!bestMatch.target) return array;
 
                     const modifier = modifiers.find((x) => x.name === bestMatch.target);
-
+                    console.log('modifier')
+                    console.log(JSON.stringify(modifier, null, 2));
                     if (modifier) {
                         array.push({
                             productId: modifier.id,

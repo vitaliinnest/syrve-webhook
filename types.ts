@@ -417,10 +417,10 @@ export interface ShippingLine {
     total:        string;
     total_tax:    string;
     taxes:        any[];
-    meta_data:    ShippingLineMetaDatum[];
+    meta_data:    ShippingLineMetaData[];
 }
 
-export interface ShippingLineMetaDatum {
+export interface ShippingLineMetaData {
     id:            number;
     key:           string;
     value:         string;
