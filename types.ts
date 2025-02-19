@@ -60,39 +60,52 @@ export interface ISyrveOrganizations {
 
 export type PaymentTypeKind = "Cash" | "Card";
 
+type IDeliveryPoint = {
+    address?: {
+        street: {
+            id: string;
+            name?: string;
+            city?: string;
+        };
+        house: string;
+        flat?: string;
+    };
+    comment?: string;
+};
+
+type NewTypeIPayments =
+    | {
+          paymentTypeKind: PaymentTypeKind;
+          sum: number;
+          paymentTypeId: string;
+      }[]
+    | [];
+
+type IDeliveryCreateOrderPayload = {
+    orderTypeId: string;
+    phone: string;
+    deliveryPoint?: IDeliveryPoint;
+    comment?: string;
+    customer: {
+        name: string;
+        type: "one-time";
+    };
+    payments: NewTypeIPayments;
+    items: IDeliveryItem[];
+};
+
 export interface IDeliveryCreatePayload {
     organizationId: string;
     terminalGroupId: string;
-    order: {
-        orderTypeId: string;
-        phone: string;
-        deliveryPoint?: {
-            address?: {
-                street: {
-                    id: string;
-                    name?: string;
-                    city?: string;
-                };
-                house: string;
-                flat?: string;
-            };
-            comment?: string;
-        };
-        comment?: string;
-        customer: {
-            name: string;
-            type: "one-time";
-        };
-        payments:
-            | {
-                  paymentTypeKind: PaymentTypeKind;
-                  sum: number;
-                  paymentTypeId: string;
-              }[]
-            | [];
-        items: IDeliveryItem[];
-    };
+    order: IDeliveryCreateOrderPayload;
 }
+
+export type IModifier = {
+    productId: string;
+    name?: string;
+    amount: number;
+    productGroupId: string;
+};
 
 export interface IDeliveryItem {
     productId: string;
@@ -101,26 +114,7 @@ export interface IDeliveryItem {
     name?: string;
     amount: number;
     comment?: string;
-    modifiers?: {
-        productId: string;
-        name?: string;
-        amount: number;
-        productGroupId: string;
-    }[];
-}
-
-export interface ITildaProduct {
-    name: string;
-    quantity: string;
-    amount: string;
-    price: string;
-    sku: string;
-    options?: OptionsEntity[] | null;
-}
-export interface OptionsEntity {
-    option: string;
-    variant: string;
-    quantity?: number;
+    modifiers?: IModifier[];
 }
 
 export namespace ISyrveNomenclatureSpace {
@@ -243,6 +237,7 @@ export namespace ISyrveNomenclatureSpace {
         groups: Group[];
         productCategories: ProductCategory[];
         products: Product[];
+        productByIdMap: { [key: string]: Product };
         sizes: any[];
         revision: number;
     }
@@ -422,7 +417,21 @@ export interface ShippingLine {
 export interface ShippingLineMetaData {
     id: number;
     key: string;
-    value: string;
+    value: string | MetaDataValue;
     display_key: string;
     display_value: string;
+}
+
+export interface MetaDataValue {
+    type: string;
+    name: string;
+    label: string;
+    value: { [key: string]: { label: string; value: string } };
+    is_fee: boolean;
+    is_show_price: boolean;
+    price: { [key: string]: number };
+    quantity_depend: boolean;
+    cur_swit: number;
+    form_data: FormData;
+    meta_id: number;
 }
