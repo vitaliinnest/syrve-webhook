@@ -39,7 +39,7 @@ class SyrveApi {
             ] = `Bearer ${response.data.token}`;
     }
 
-    async create_delivery(payload: IDeliveryCreatePayload): Promise<any> {
+    async createDelivery(payload: IDeliveryCreatePayload): Promise<any> {
         const [error, response] = await to(
             this.axios.post(`deliveries/create`, payload)
         );
@@ -50,7 +50,7 @@ class SyrveApi {
         if (status === 401) {
             await this.access_token();
 
-            return this.create_delivery(payload);
+            return this.createDelivery(payload);
         }
 
         return response;

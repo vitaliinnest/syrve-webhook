@@ -17,7 +17,7 @@ const webhook = async (req: Request, res: Response) => {
 
     const delivery = await createDeliveryObject(req.body);
     const [error, result] = await modules.to(
-        syrveApi.create_delivery(delivery)
+        syrveApi.createDelivery(delivery)
     );
 
     if (error) {
