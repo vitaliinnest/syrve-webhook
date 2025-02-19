@@ -28,7 +28,7 @@ export const prepareItems = (
 
     const notFoundItems: WoocommerceProduct[] = [];
 
-    const deliveryItems: IDeliveryItem[] = [];
+    const items: IDeliveryItem[] = [];
     orderProducts.forEach((orderProduct) => {
         const [sku, requiredModifier] = orderProduct.sku.split("_");
         const syrveProduct = nomenclature.productByCodeMap[sku];
@@ -78,71 +78,11 @@ export const prepareItems = (
                         })
                     );
             }
-            deliveryItems.push(deliveryItem);
+            items.push(deliveryItem);
         } else {
             notFoundItems.push(orderProduct);
         }
     });
-
-    const items = orderProducts.reduce((array: IDeliveryItem[], orderProduct) => {
-        const [sku, requiredModifier] = orderProduct.sku.split("_");
-
-        const syrveProduct = nomenclature.productByCodeMap[sku];
-
-        if (syrveProduct) {
-            const deliveryItem: IDeliveryItem = {
-                productId: syrveProduct.id,
-                type: "Product",
-                amount: Number(orderProduct.quantity),
-                modifiers: [],
-            };
-
-            if (orderProduct.meta_data.length) {
-                if (isNumber(requiredModifier)) {
-                    const modifierProduct = nomenclature.productByCodeMap[requiredModifier];
-                    const modifier: IModifier = {
-                        name: modifierProduct.name,
-                        productId: modifierProduct.id,
-                        amount: 1,
-                        productGroupId: syrveProduct.groupModifiers[0].id,
-                    };
-                    deliveryItem.modifiers?.push(modifier);
-                }
-
-                orderProduct.meta_data.forEach(({ value }) => {
-                    if (Array.isArray(value)) {
-                        const modifierProduct = nomenclature.productByCodeMap[Object.values(value[0].value)[0].value];
-                        const modifier: IModifier = {
-                            name: modifierProduct.name,
-                            productId: modifierProduct.id,
-                            amount: 1,
-                            productGroupId: syrveProduct.groupModifiers[0].id,
-                        };
-                        deliveryItem.modifiers?.push(modifier);
-                    }
-                });
-
-                // required modifiers
-                syrveProduct.groupModifiers
-                    .filter((x) => x.required)
-                    .filter((x) => !deliveryItem.modifiers?.find((pred) => pred.productGroupId === x.id))
-                    .map((item) =>
-                        deliveryItem.modifiers?.push({
-                            productGroupId: item.id,
-                            productId: item.childModifiers[0].id,
-                            amount: 1,
-                        })
-                    );
-            }
-
-            if (!array.find((pred) => pred.productId === syrveProduct.id)) {
-                array.push(deliveryItem);
-            }
-        } else {
-            notFoundItems.push(orderProduct);
-        }
-        return array;
-    }, []);
 
     if (!freeDelivery || (items.length === 0 && notFoundItems.length > 0)) {
         items.push({
