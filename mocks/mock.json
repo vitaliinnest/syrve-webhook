@@ -1,124 +1,122 @@
 {
-    "id": 5595,
+    "id": 12470,
     "parent_id": 0,
     "status": "processing",
     "currency": "UAH",
-    "version": "7.6.1",
+    "version": "9.4.3",
     "prices_include_tax": false,
-    "date_created": "2023-05-03T22:16:14",
-    "date_modified": "2023-05-03T22:16:14",
+    "date_created": "2025-02-19T10:48:54",
+    "date_modified": "2025-02-19T10:48:54",
     "discount_total": "0",
     "discount_tax": "0",
-    "shipping_total": "89",
+    "shipping_total": "70",
     "shipping_tax": "0",
     "cart_tax": "0",
-    "total": "218",
+    "total": "1117",
     "total_tax": "0",
-    "customer_id": 0,
-    "order_key": "wc_order_HjYmBBFpo4mjD",
+    "customer_id": 5,
+    "order_key": "wc_order_LeGMtkgTcxCqm",
     "billing": {
-        "first_name": "тест",
+        "first_name": "ТЕСТ",
         "last_name": "",
         "company": "",
-        "address_1": "тест",
-        "address_2": "тест",
-        "city": "Харьков",
+        "address_1": "23 Квітня",
+        "address_2": "",
+        "city": "Kharkov",
         "state": "",
         "postcode": "",
         "country": "UA",
-        "email": "",
-        "phone": "+380 (99) 999-99-99"
+        "email": "admin@admin.com",
+        "phone": "+38(099) 999-99-99"
     },
     "shipping": {
-        "first_name": "тест",
+        "first_name": "ТЕСТ",
         "last_name": "",
         "company": "",
-        "address_1": "тест",
-        "address_2": "тест",
-        "city": "Харьков",
+        "address_1": "23 Квітня",
+        "address_2": "",
+        "city": "Kharkov",
         "state": "",
         "postcode": "",
         "country": "UA",
         "phone": ""
     },
     "payment_method": "cod",
-    "payment_method_title": "Оплата наличными",
+    "payment_method_title": "Оплата готівкою",
     "transaction_id": "",
-    "customer_ip_address": "46.160.91.33",
-    "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+    "customer_ip_address": "109.86.217.16",
+    "customer_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
     "created_via": "checkout",
     "customer_note": "",
     "date_completed": null,
     "date_paid": null,
-    "cart_hash": "b33b280aa517bde731a40c7da2e59dde",
-    "number": "5595",
-    "meta_data": [
-        {
-            "id": 70110,
-            "key": "is_vat_exempt",
-            "value": "no"
-        }
-    ],
+    "cart_hash": "fb0a0a26143e2d4678ecb994247a842c",
+    "number": "12470",
+    "meta_data": [],
     "line_items": [
         {
-            "id": 250,
-            "name": "Ветчина и Грибы - 25-сантиметров",
-            "product_id": 5352,
-            "variation_id": 5353,
+            "id": 20789,
+            "name": "Барбекю - 30-сантиметрів",
+            "product_id": 5143,
+            "variation_id": 5145,
             "quantity": 1,
             "tax_class": "",
-            "subtotal": "129",
+            "subtotal": "329",
             "subtotal_tax": "0",
-            "total": "129",
+            "total": "329",
             "total_tax": "0",
             "taxes": [],
             "meta_data": [
                 {
-                    "id": 2252,
+                    "id": 199426,
                     "key": "pa_rozmir",
-                    "value": "25-santimetrov",
-                    "display_key": "Размер",
-                    "display_value": "25-сантиметров"
+                    "value": "30-santimetriv",
+                    "display_key": "Розмір",
+                    "display_value": "30-сантиметрів"
                 },
                 {
-                    "id": 2253,
-                    "key": "Тесто:",
-                    "value": "Традиционное",
-                    "display_key": "Тесто",
-                    "display_value": "Традиционное"
+                    "id": 199427,
+                    "key": "Тісто",
+                    "value": "Борт Хот-Дог (30см) (60грн.)",
+                    "display_key": "Тісто",
+                    "display_value": "Борт Хот-Дог (30см) (60грн.)"
                 },
                 {
-                    "id": 2254,
+                    "id": 199428,
                     "key": "_WCPA_order_meta_data",
                     "value": [
                         {
                             "type": "select",
-                            "name": "select-1681804055200",
-                            "label": "Тесто",
-                            "value": [
-                                {
-                                    "i": 0,
-                                    "value": "Традиционное",
-                                    "label": "Традиционное"
+                            "name": "select-1682455349760",
+                            "label": "Тісто",
+                            "value": {
+                                "2": {
+                                    "i": 2,
+                                    "value": "4324423602",
+                                    "label": "Борт Хот-Дог (30см)"
                                 }
-                            ],
+                            },
                             "is_fee": false,
                             "is_show_price": false,
-                            "price": false,
+                            "price": {
+                                "2": 60
+                            },
                             "quantity_depend": false,
                             "cur_swit": 1,
                             "form_data": {
                                 "type": "select",
-                                "elementId": "wcpa-select-1681804055200",
-                                "label": "Тесто:",
+                                "elementId": "wcpa-select-1682455349761",
+                                "label": "Тісто",
+                                "enablePrice": true,
                                 "priceOptions": "different_for_all",
                                 "pricingType": "fixed",
-                                "name": "select-1681804055200",
+                                "name": "select-1682455349760",
                                 "enableCl": true,
                                 "cl_rule": "show",
-                                "cl_val": "61",
+                                "cl_val": "62",
                                 "col": 6,
-                                "form_id": 5555,
+                                "price": 0,
+                                "form_id": 4636,
                                 "form_rules": {
                                     "pric_cal_option_once": false,
                                     "exclude_from_discount": false,
@@ -129,39 +127,43 @@
                                 },
                                 "cl_status": "visible"
                             },
-                            "meta_id": 2253
+                            "meta_id": 199427
                         }
                     ],
                     "display_key": "_WCPA_order_meta_data",
                     "display_value": [
                         {
                             "type": "select",
-                            "name": "select-1681804055200",
-                            "label": "Тесто",
-                            "value": [
-                                {
-                                    "i": 0,
-                                    "value": "Традиционное",
-                                    "label": "Традиционное"
+                            "name": "select-1682455349760",
+                            "label": "Тісто",
+                            "value": {
+                                "2": {
+                                    "i": 2,
+                                    "value": "4324423602",
+                                    "label": "Борт Хот-Дог (30см)"
                                 }
-                            ],
+                            },
                             "is_fee": false,
                             "is_show_price": false,
-                            "price": false,
+                            "price": {
+                                "2": 60
+                            },
                             "quantity_depend": false,
                             "cur_swit": 1,
                             "form_data": {
                                 "type": "select",
-                                "elementId": "wcpa-select-1681804055200",
-                                "label": "Тесто",
+                                "elementId": "wcpa-select-1682455349761",
+                                "label": "Тісто",
+                                "enablePrice": true,
                                 "priceOptions": "different_for_all",
                                 "pricingType": "fixed",
-                                "name": "select-1681804055200",
+                                "name": "select-1682455349760",
                                 "enableCl": true,
                                 "cl_rule": "show",
-                                "cl_val": "61",
+                                "cl_val": "62",
                                 "col": 6,
-                                "form_id": 5555,
+                                "price": 0,
+                                "form_id": 4636,
                                 "form_rules": {
                                     "pric_cal_option_once": false,
                                     "exclude_from_discount": false,
@@ -172,37 +174,170 @@
                                 },
                                 "cl_status": "visible"
                             },
-                            "meta_id": 2253
+                            "meta_id": 199427
                         }
                     ]
                 }
             ],
-            "sku": "967995832_UKR",
-            "price": 129,
+            "sku": "967995830",
+            "price": 329,
             "image": {
-                "id": 5140,
-                "src": "https://pizza.ikpuba.website/wp-content/uploads/2023/04/92804571.webp"
+                "id": 5141,
+                "src": "https://chizpizza.kh.ua/wp-content/uploads/2023/04/95188826.webp"
             },
-            "parent_name": "Ветчина и Грибы"
+            "parent_name": "Барбекю"
+        },
+        {
+            "id": 20790,
+            "name": "Чізбургер - 35-сантиметрів",
+            "product_id": 5119,
+            "variation_id": 5122,
+            "quantity": 2,
+            "tax_class": "",
+            "subtotal": "718",
+            "subtotal_tax": "0",
+            "total": "718",
+            "total_tax": "0",
+            "taxes": [],
+            "meta_data": [
+                {
+                    "id": 199438,
+                    "key": "pa_rozmir",
+                    "value": "35-santimetriv",
+                    "display_key": "Розмір",
+                    "display_value": "35-сантиметрів"
+                },
+                {
+                    "id": 199439,
+                    "key": "Тісто",
+                    "value": "Тонке (0грн.)",
+                    "display_key": "Тісто",
+                    "display_value": "Тонке (0грн.)"
+                },
+                {
+                    "id": 199440,
+                    "key": "_WCPA_order_meta_data",
+                    "value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681837448415",
+                            "label": "Тісто",
+                            "value": {
+                                "3": {
+                                    "i": 3,
+                                    "value": "432442360325780",
+                                    "label": "Тонке"
+                                }
+                            },
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": {
+                                "3": 0
+                            },
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681837448417",
+                                "label": "Тісто",
+                                "enablePrice": true,
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681837448415",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "63",
+                                "col": 6,
+                                "price": 0,
+                                "form_id": 4636,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 199439
+                        }
+                    ],
+                    "display_key": "_WCPA_order_meta_data",
+                    "display_value": [
+                        {
+                            "type": "select",
+                            "name": "select-1681837448415",
+                            "label": "Тісто",
+                            "value": {
+                                "3": {
+                                    "i": 3,
+                                    "value": "432442360325780",
+                                    "label": "Тонке"
+                                }
+                            },
+                            "is_fee": false,
+                            "is_show_price": false,
+                            "price": {
+                                "3": 0
+                            },
+                            "quantity_depend": false,
+                            "cur_swit": 1,
+                            "form_data": {
+                                "type": "select",
+                                "elementId": "wcpa-select-1681837448417",
+                                "label": "Тісто",
+                                "enablePrice": true,
+                                "priceOptions": "different_for_all",
+                                "pricingType": "fixed",
+                                "name": "select-1681837448415",
+                                "enableCl": true,
+                                "cl_rule": "show",
+                                "cl_val": "63",
+                                "col": 6,
+                                "price": 0,
+                                "form_id": 4636,
+                                "form_rules": {
+                                    "pric_cal_option_once": false,
+                                    "exclude_from_discount": false,
+                                    "pric_use_as_fee": false,
+                                    "fee_label": "Fee",
+                                    "render_after_acb": false,
+                                    "disp_hide_options_price": true
+                                },
+                                "cl_status": "visible"
+                            },
+                            "meta_id": 199439
+                        }
+                    ]
+                }
+            ],
+            "sku": "967995895",
+            "price": 359,
+            "image": {
+                "id": 5128,
+                "src": "https://chizpizza.kh.ua/wp-content/uploads/2023/04/23845226.webp"
+            },
+            "parent_name": "Чізбургер"
         }
     ],
     "tax_lines": [],
     "shipping_lines": [
         {
-            "id": 251,
-            "method_title": "Доставка по адресу",
+            "id": 20791,
+            "method_title": "Доставка за адресою",
             "method_id": "flat_rate",
             "instance_id": "2",
-            "total": "89",
+            "total": "70",
             "total_tax": "0",
             "taxes": [],
             "meta_data": [
                 {
-                    "id": 2260,
-                    "key": "Товары",
-                    "value": "Ветчина и Грибы - 25-сантиметров × 1",
-                    "display_key": "Товары",
-                    "display_value": "Ветчина и Грибы - 25-сантиметров × 1"
+                    "id": 199446,
+                    "key": "Позиції",
+                    "value": "Барбекю - 30-сантиметрів &times; 1, Чізбургер - 35-сантиметрів &times; 2",
+                    "display_key": "Позиції",
+                    "display_value": "Барбекю - 30-сантиметрів &times; 1, Чізбургер - 35-сантиметрів &times; 2"
                 }
             ]
         }
@@ -210,14 +345,34 @@
     "fee_lines": [],
     "coupon_lines": [],
     "refunds": [],
-    "payment_url": "https://pizza.ikpuba.website/checkout/order-pay/5595/?pay_for_order=true&key=wc_order_HjYmBBFpo4mjD",
+    "payment_url": "https://chizpizza.kh.ua/checkout/order-pay/12470/?pay_for_order=true&key=wc_order_LeGMtkgTcxCqm",
     "is_editable": false,
     "needs_payment": false,
     "needs_processing": true,
-    "date_created_gmt": "2023-05-03T19:16:14",
-    "date_modified_gmt": "2023-05-03T19:16:14",
+    "date_created_gmt": "2025-02-19T07:48:54",
+    "date_modified_gmt": "2025-02-19T07:48:54",
     "date_completed_gmt": null,
     "date_paid_gmt": null,
-    "lang": "ru",
-    "currency_symbol": "грн."
+    "lang": "uk",
+    "currency_symbol": "грн.",
+    "_links": {
+        "self": [
+            {
+                "href": "https://chizpizza.kh.ua/wp-json/wc/v3/orders/12470",
+                "targetHints": {
+                    "allow": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://chizpizza.kh.ua/wp-json/wc/v3/orders"
+            }
+        ],
+        "customer": [
+            {
+                "href": "https://chizpizza.kh.ua/wp-json/wc/v3/customers/5"
+            }
+        ]
+    }
 }
