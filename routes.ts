@@ -15,7 +15,7 @@ export default (app: Express) => {
     });
 
     app.get("/nomenclature", (req, res) =>
-        res.send(database.get("nomenclature"))
+        res.send(database.getNomencalture)
     );
     app.get("/streets", (req, res) => res.send(database.get("streets")));
 };
