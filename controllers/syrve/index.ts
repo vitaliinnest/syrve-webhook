@@ -53,7 +53,7 @@ async function createDeliveryObject(order: WoocommerceOrder): Promise<IDeliveryC
                   floor: address.floor,
                   flat: address.flat,
               },
-              comment: `${toDeliver ? "Доставка по адресу" : "Самовывоз"} \n${strAddress} \n${
+              comment: `${toDeliver ? "Доставка за адресою" : "Самовивіз"} \n${strAddress} \n${
                   order.payment_method_title
               }`,
           }
@@ -70,8 +70,8 @@ async function createDeliveryObject(order: WoocommerceOrder): Promise<IDeliveryC
             orderTypeId: toDeliver
                 ? config.SYRVE.order_types.deliveryByCourier
                 : config.SYRVE.order_types.deliveryPickUp,
-            comment: `Комментарий клиента: ${order.customer_note} | ${strAddress} | ${order.payment_method_title}${
-                strNotFoundItems.length > 0 ? ` | Не найденные товары: ${strNotFoundItems}` : ""
+            comment: `Коментар клієнта: ${order.customer_note} | ${strAddress} | ${order.payment_method_title}${
+                strNotFoundItems.length > 0 ? ` | Не знайдені товари: ${strNotFoundItems}` : ""
             }`,
             customer: { name: order.billing.first_name, type: "one-time" },
             payments: [
