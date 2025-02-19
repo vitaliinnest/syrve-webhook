@@ -5,7 +5,7 @@ import syrveApi from "../../modules/SyrveApi";
 import config from "../../config";
 
 const webhook = async (req: Request, res: Response) => {
-    console.log(JSON.stringify(req.body, null, 2));
+    // console.log(JSON.stringify(req.body, null, 2));
 
     if (req.body.test) return res.status(200).send({ success: true });
     if (req.body.webhook_id) return res.status(200).send({ success: true });
