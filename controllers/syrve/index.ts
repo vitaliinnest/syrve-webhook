@@ -1,10 +1,5 @@
 import * as modules from "../../modules";
-import {
-    WoocommerceOrder,
-    IDeliveryCreatePayload,
-    PaymentTypeKind,
-    OrderAddressKey,
-} from "../../types";
+import { WoocommerceOrder, IDeliveryCreatePayload, PaymentTypeKind, OrderAddressKey } from "../../types";
 import { Request, Response } from "express";
 import syrveApi from "../../modules/SyrveApi";
 import config from "../../config";
@@ -16,9 +11,7 @@ const webhook = async (req: Request, res: Response) => {
     if (req.body.webhook_id) return res.status(200).send({ success: true });
 
     const delivery = await createDeliveryObject(req.body);
-    const [error, result] = await modules.to(
-        syrveApi.createDelivery(delivery)
-    );
+    const [error, result] = await modules.to(syrveApi.createDelivery(delivery));
 
     if (error) {
         console.error(error);
@@ -38,9 +31,7 @@ function logData(delivery: IDeliveryCreatePayload, result: any) {
     console.log(JSON.stringify(result, null, 2));
 }
 
-async function createDeliveryObject(
-    order: WoocommerceOrder
-): Promise<IDeliveryCreatePayload> {
+async function createDeliveryObject(order: WoocommerceOrder): Promise<IDeliveryCreatePayload> {
     const toDeliver = isDelivery(order);
     const freeDelivery = isFreeDelivery(order);
 
@@ -62,9 +53,9 @@ async function createDeliveryObject(
                   floor: address.floor,
                   flat: address.flat,
               },
-              comment: `${
-                  toDeliver ? "Доставка по адресу" : "Самовывоз"
-              } \n${strAddress} \n${order.payment_method_title}`,
+              comment: `${toDeliver ? "Доставка по адресу" : "Самовывоз"} \n${strAddress} \n${
+                  order.payment_method_title
+              }`,
           }
         : {};
 
@@ -79,22 +70,15 @@ async function createDeliveryObject(
             orderTypeId: toDeliver
                 ? config.SYRVE.order_types.deliveryByCourier
                 : config.SYRVE.order_types.deliveryPickUp,
-            comment: `Комментарий клиента: ${
-                order.customer_note
-            } | ${strAddress} | ${order.payment_method_title}${
-                strNotFoundItems.length > 0
-                    ? ` | Не найденные товары: ${strNotFoundItems}`
-                    : ""
+            comment: `Комментарий клиента: ${order.customer_note} | ${strAddress} | ${order.payment_method_title}${
+                strNotFoundItems.length > 0 ? ` | Не найденные товары: ${strNotFoundItems}` : ""
             }`,
             customer: { name: order.billing.first_name, type: "one-time" },
             payments: [
                 {
                     paymentTypeKind,
                     sum: +order.total,
-                    paymentTypeId:
-                        paymentTypeKind === "Card"
-                            ? config.SYRVE.payments.card
-                            : config.SYRVE.payments.cash,
+                    paymentTypeId: paymentTypeKind === "Card" ? config.SYRVE.payments.card : config.SYRVE.payments.cash,
                 },
             ],
         },

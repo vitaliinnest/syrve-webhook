@@ -33,16 +33,11 @@ class SyrveApi {
         );
         if (error) console.error(error);
 
-        if (response.data?.token)
-            this.axios.defaults.headers[
-                "Authorization"
-            ] = `Bearer ${response.data.token}`;
+        if (response.data?.token) this.axios.defaults.headers["Authorization"] = `Bearer ${response.data.token}`;
     }
 
     async createDelivery(payload: IDeliveryCreatePayload): Promise<any> {
-        const [error, response] = await to(
-            this.axios.post(`deliveries/create`, payload)
-        );
+        const [error, response] = await to(this.axios.post(`deliveries/create`, payload));
         if (error) console.error(error);
 
         const status = response?.status || response?.response?.status;

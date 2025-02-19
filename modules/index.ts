@@ -1,14 +1,8 @@
-import {
-    IDeliveryItem,
-    ISyrveNomenclatureSpace,
-    WoocommerceOrder,
-    WoocommerceProduct,
-} from "../types";
+import { IDeliveryItem, ISyrveNomenclatureSpace, WoocommerceOrder, WoocommerceProduct } from "../types";
 import { database } from "../config/database";
 import config from "../config";
 
-export const to = (promise: Promise<any>) =>
-    promise.then((data) => [null, data]).catch((error) => [error]);
+export const to = (promise: Promise<any>) => promise.then((data) => [null, data]).catch((error) => [error]);
 
 export const findStreet = (name: string): string => {
     const streets: any = database.get("streets");
@@ -30,26 +24,20 @@ export const prepareItems = (
     notFoundItems: WoocommerceProduct[];
 } => {
     const orderProducts = order.line_items;
-    const nomenclature: ISyrveNomenclatureSpace.RootObject =
-        database.getNomencalture();
+    const nomenclature: ISyrveNomenclatureSpace.RootObject = database.getNomencalture();
 
     const notFoundItems: WoocommerceProduct[] = [];
-    const items = orderProducts.reduce(
-        (array: IDeliveryItem[], orderProduct) => {
-            const [sku] = orderProduct.sku.split("_");
-            const syrveProduct = nomenclature.products.find((p) =>
-                p.code.includes(sku)
-            );
+    const items = orderProducts.reduce((array: IDeliveryItem[], orderProduct) => {
+        const [sku, pizzaModifier] = orderProduct.sku.split("_");
+        const syrveProduct = nomenclature.products.find((p) => p.code === sku);
 
-            if (syrveProduct) {
-                newFunction(syrveProduct, orderProduct, nomenclature, array);
-            } else {
-                notFoundItems.push(orderProduct);
-            }
-            return array;
-        },
-        []
-    );
+        if (syrveProduct) {
+            newFunction(syrveProduct, orderProduct, nomenclature, array);
+        } else {
+            notFoundItems.push(orderProduct);
+        }
+        return array;
+    }, []);
 
     if (!freeDelivery || (items.length === 0 && notFoundItems.length > 0)) {
         items.push({
@@ -77,9 +65,7 @@ function newFunction(
     if (orderProduct.meta_data.length) {
         const modifiers = syrveProduct.groupModifiers
             .map(({ childModifiers, id, ...row }: any) => {
-                childModifiers = childModifiers.map((row: any) =>
-                    nomenclature.products.find((x) => x.id === row.id)
-                );
+                childModifiers = childModifiers.map((row: any) => nomenclature.products.find((x) => x.id === row.id));
                 childModifiers = childModifiers.map((row: any) => ({
                     ...row,
                     productGroupId: id,
@@ -118,12 +104,7 @@ function newFunction(
         // required modifiers
         syrveProduct.groupModifiers
             .filter((x) => x.required)
-            .filter(
-                (x) =>
-                    !deliveryItem.modifiers?.find(
-                        (pred) => pred.productGroupId === x.id
-                    )
-            )
+            .filter((x) => !deliveryItem.modifiers?.find((pred) => pred.productGroupId === x.id))
             .map((item) =>
                 deliveryItem.modifiers?.push({
                     productGroupId: item.id,

@@ -16,16 +16,11 @@ export const database = {
     },
     get: (param: string) => config[param].data,
     getNomencalture: () => {
-        const nomenclature = database.get(
-            "nomenclature"
-        ) as ISyrveNomenclatureSpace.RootObject;
-        nomenclature.productByIdMap = nomenclature.products.reduce(
-            (map, product) => {
-                map[product.id] = product;
-                return map;
-            },
-            {} as { [key: string]: ISyrveNomenclatureSpace.Product }
-        );
+        const nomenclature = database.get("nomenclature") as ISyrveNomenclatureSpace.RootObject;
+        nomenclature.productByIdMap = nomenclature.products.reduce((map, product) => {
+            map[product.id] = product;
+            return map;
+        }, {} as { [key: string]: ISyrveNomenclatureSpace.Product });
         return nomenclature;
     },
 };
