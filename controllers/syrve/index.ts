@@ -146,5 +146,5 @@ function getPaymentTypeKind(wcbody: WoocommerceOrder): PaymentTypeKind {
 }
 
 function addressToString(address: Address): string {
-    return `Улица: ${address.street}, Дом: ${address.house}, Подъезд: ${address.entrance}, Квартира: ${address.flat}, Этаж: ${address.floor}`;
+    return `Вулиця: ${address.street}, Дім: ${address.house}, Під'їзд: ${address.entrance}, Квартира: ${address.flat}, Поверх: ${address.floor}`;
 }
