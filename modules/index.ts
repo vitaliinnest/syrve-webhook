@@ -1,4 +1,4 @@
-import { IDeliveryItem, ISyrveNomenclatureSpace, WoocommerceOrder, WoocommerceProduct } from "../types";
+import { IDeliveryItem, IModifier, WoocommerceOrder, WoocommerceProduct } from "../types";
 import { database } from "../config/database";
 import config from "../config";
 
@@ -24,15 +24,120 @@ export const prepareItems = (
     notFoundItems: WoocommerceProduct[];
 } => {
     const orderProducts = order.line_items;
-    const nomenclature: ISyrveNomenclatureSpace.RootObject = database.getNomencalture();
+    const nomenclature = database.getNomencalture();
 
     const notFoundItems: WoocommerceProduct[] = [];
-    const items = orderProducts.reduce((array: IDeliveryItem[], orderProduct) => {
-        const [sku, pizzaModifier] = orderProduct.sku.split("_");
-        const syrveProduct = nomenclature.products.find((p) => p.code === sku);
+
+    const deliveryItems: IDeliveryItem[] = [];
+    orderProducts.forEach((orderProduct) => {
+        const [sku, requiredModifier] = orderProduct.sku.split("_");
+        const syrveProduct = nomenclature.productByCodeMap[sku];
 
         if (syrveProduct) {
-            newFunction(syrveProduct, orderProduct, nomenclature, array);
+            const deliveryItem: IDeliveryItem = {
+                productId: syrveProduct.id,
+                type: "Product",
+                amount: Number(orderProduct.quantity),
+                modifiers: [],
+            };
+
+            if (orderProduct.meta_data.length) {
+                if (isNumber(requiredModifier)) {
+                    const modifierProduct = nomenclature.productByCodeMap[requiredModifier];
+                    const modifier: IModifier = {
+                        name: modifierProduct.name,
+                        productId: modifierProduct.id,
+                        amount: 1,
+                        productGroupId: syrveProduct.groupModifiers[0].id,
+                    };
+                    deliveryItem.modifiers?.push(modifier);
+                }
+
+                orderProduct.meta_data.forEach(({ value }) => {
+                    if (Array.isArray(value)) {
+                        const modifierProduct = nomenclature.productByCodeMap[Object.values(value[0].value)[0].value];
+                        const modifier: IModifier = {
+                            name: modifierProduct.name,
+                            productId: modifierProduct.id,
+                            amount: 1,
+                            productGroupId: syrveProduct.groupModifiers[0].id,
+                        };
+                        deliveryItem.modifiers?.push(modifier);
+                    }
+                });
+
+                // required modifiers
+                syrveProduct.groupModifiers
+                    .filter((x) => x.required)
+                    .filter((x) => !deliveryItem.modifiers?.find((pred) => pred.productGroupId === x.id))
+                    .map((item) =>
+                        deliveryItem.modifiers?.push({
+                            productGroupId: item.id,
+                            productId: item.childModifiers[0].id,
+                            amount: 1,
+                        })
+                    );
+            }
+            deliveryItems.push(deliveryItem);
+        } else {
+            notFoundItems.push(orderProduct);
+        }
+    });
+
+    const items = orderProducts.reduce((array: IDeliveryItem[], orderProduct) => {
+        const [sku, requiredModifier] = orderProduct.sku.split("_");
+
+        const syrveProduct = nomenclature.productByCodeMap[sku];
+
+        if (syrveProduct) {
+            const deliveryItem: IDeliveryItem = {
+                productId: syrveProduct.id,
+                type: "Product",
+                amount: Number(orderProduct.quantity),
+                modifiers: [],
+            };
+
+            if (orderProduct.meta_data.length) {
+                if (isNumber(requiredModifier)) {
+                    const modifierProduct = nomenclature.productByCodeMap[requiredModifier];
+                    const modifier: IModifier = {
+                        name: modifierProduct.name,
+                        productId: modifierProduct.id,
+                        amount: 1,
+                        productGroupId: syrveProduct.groupModifiers[0].id,
+                    };
+                    deliveryItem.modifiers?.push(modifier);
+                }
+
+                orderProduct.meta_data.forEach(({ value }) => {
+                    if (Array.isArray(value)) {
+                        const modifierProduct = nomenclature.productByCodeMap[Object.values(value[0].value)[0].value];
+                        const modifier: IModifier = {
+                            name: modifierProduct.name,
+                            productId: modifierProduct.id,
+                            amount: 1,
+                            productGroupId: syrveProduct.groupModifiers[0].id,
+                        };
+                        deliveryItem.modifiers?.push(modifier);
+                    }
+                });
+
+                // required modifiers
+                syrveProduct.groupModifiers
+                    .filter((x) => x.required)
+                    .filter((x) => !deliveryItem.modifiers?.find((pred) => pred.productGroupId === x.id))
+                    .map((item) =>
+                        deliveryItem.modifiers?.push({
+                            productGroupId: item.id,
+                            productId: item.childModifiers[0].id,
+                            amount: 1,
+                        })
+                    );
+            }
+
+            if (!array.find((pred) => pred.productId === syrveProduct.id)) {
+                array.push(deliveryItem);
+            }
         } else {
             notFoundItems.push(orderProduct);
         }
@@ -50,71 +155,6 @@ export const prepareItems = (
     return { items, notFoundItems };
 };
 
-function newFunction(
-    syrveProduct: ISyrveNomenclatureSpace.Product,
-    orderProduct: WoocommerceProduct,
-    nomenclature: ISyrveNomenclatureSpace.RootObject,
-    array: IDeliveryItem[]
-) {
-    const deliveryItem: IDeliveryItem = {
-        productId: syrveProduct.id,
-        type: "Product",
-        amount: Number(orderProduct.quantity),
-    };
-
-    if (orderProduct.meta_data.length) {
-        const modifiers = syrveProduct.groupModifiers
-            .map(({ childModifiers, id, ...row }: any) => {
-                childModifiers = childModifiers.map((row: any) => nomenclature.products.find((x) => x.id === row.id));
-                childModifiers = childModifiers.map((row: any) => ({
-                    ...row,
-                    productGroupId: id,
-                }));
-                return childModifiers;
-            })
-            .flat();
-
-        // deliveryItem.modifiers = orderProduct.meta_data.reduce(
-        //     (array: any[], { key, value }) => {
-        //         if (Array.isArray(value) || value === "") return array;
-        //         const { bestMatch } = stringSimilarity.findBestMatch(
-        //             value,
-        //             modifiers.map((row) => row.name)
-        //         );
-        //         if (!bestMatch.target) return array;
-
-        //         const modifier = modifiers.find(
-        //             (x) => x.name === bestMatch.target
-        //         );
-        //         console.log("modifier");
-        //         console.log(JSON.stringify(modifier, null, 2));
-        //         if (modifier) {
-        //             array.push({
-        //                 productId: modifier.id,
-        //                 productGroupId: modifier.productGroupId,
-        //                 amount: 1,
-        //             });
-        //         }
-
-        //         return array;
-        //     },
-        //     []
-        // );
-
-        // required modifiers
-        syrveProduct.groupModifiers
-            .filter((x) => x.required)
-            .filter((x) => !deliveryItem.modifiers?.find((pred) => pred.productGroupId === x.id))
-            .map((item) =>
-                deliveryItem.modifiers?.push({
-                    productGroupId: item.id,
-                    productId: item.childModifiers[0].id,
-                    amount: 1,
-                })
-            );
-    }
-
-    if (!array.find((pred) => pred.productId === syrveProduct.id)) {
-        array.push(deliveryItem);
-    }
+function isNumber(value: string | undefined): boolean {
+    return value !== undefined && value !== null && value !== "" && !isNaN(Number(value.toString()));
 }

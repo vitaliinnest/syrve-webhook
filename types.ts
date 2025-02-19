@@ -193,7 +193,7 @@ export namespace ISyrveNomenclatureSpace {
         groups: Group[];
         productCategories: ProductCategory[];
         products: Product[];
-        productByIdMap: { [key: string]: Product };
+        productByCodeMap: { [key: string]: Product };
         sizes: any[];
         revision: number;
     }
