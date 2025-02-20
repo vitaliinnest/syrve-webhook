@@ -72,7 +72,16 @@ export interface IDeliveryItem {
     modifiers?: IModifier[];
 }
 
-export namespace ISyrveNomenclatureSpace {
+export namespace Syrve {
+    export interface AccessTokenPayload {
+        apiLogin: string;
+    }
+
+    export interface AccessTokenResponse {
+        correlationId: string;
+        token: string;
+    }
+
     export interface Group {
         imageLinks: any[];
         parentGroup: string;
@@ -199,6 +208,22 @@ export namespace ISyrveNomenclatureSpace {
         productByCodeMap: ProductDictionary;
         sizes: any[];
         revision: number;
+    }
+
+    export interface DeliveryCreatedPayload {
+        correlationId: string;
+        orderInfo: OrderInfo;
+    }
+
+    interface OrderInfo {
+        id: string;
+        posId: string;
+        externalNumber: any;
+        organizationId: string;
+        timestamp: number;
+        creationStatus: string;
+        errorInfo: any;
+        order: any;
     }
 }
 

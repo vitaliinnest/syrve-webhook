@@ -1,9 +1,9 @@
 import SyrveApi from "../modules/SyrveApi";
-import { ISyrveNomenclatureSpace } from "../types";
+import { Syrve } from "../types";
 
 const config: any = {
     streets: { load: () => loadStreets(), data: null },
-    nomenclature: { load: () => SyrveApi.nomenclature(), data: null },
+    nomenclature: { load: () => SyrveApi.loadNomenclatureAsync(), data: null },
 };
 
 export const database = {
@@ -14,19 +14,19 @@ export const database = {
         }
     },
     get: (param: string) => config[param].data,
-    getNomencalture: (): ISyrveNomenclatureSpace.RootObject => {
-        const nomenclature = database.get("nomenclature") as ISyrveNomenclatureSpace.RootObject;
+    getNomencalture: (): Syrve.RootObject => {
+        const nomenclature = database.get("nomenclature") as Syrve.RootObject;
         nomenclature.productByCodeMap = nomenclature.products.reduce((map, product) => {
             map[product.code] = product;
             return map;
-        }, {} as ISyrveNomenclatureSpace.ProductDictionary);
+        }, {} as Syrve.ProductDictionary);
         return nomenclature;
     },
 };
 
 async function loadStreets() {
-    const RU = await SyrveApi.street("RU");
-    const UA = await SyrveApi.street("UA");
+    const RU = await SyrveApi.loadStreetsAsync("RU");
+    const UA = await SyrveApi.loadStreetsAsync("UA");
 
     return [...RU, ...UA].reduce((streets, row) => {
         streets[row.name] = row.id;

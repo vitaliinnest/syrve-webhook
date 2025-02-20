@@ -1,8 +1,8 @@
-import { IDeliveryItem, IModifier, ISyrveNomenclatureSpace, WoocommerceOrder, WoocommerceProduct } from "../types";
+import { IDeliveryItem, IModifier, Syrve, WoocommerceOrder, WoocommerceProduct } from "../types";
 import { database } from "../config/database";
 import config from "../config";
 
-export const to = (promise: Promise<any>) => promise.then((data) => [null, data]).catch((error) => [error]);
+export const to = (promise: Promise<any>) => promise.then((data) => [data, null]).catch((error) => [null, error]);
 
 export const findStreet = (name: string): string => {
     const streets: any = database.get("streets");
@@ -85,7 +85,7 @@ export const prepareItems = (
     return { items, notFoundItems };
 };
 
-function createModifierFromProduct(modifierProduct: ISyrveNomenclatureSpace.Product): IModifier {
+function createModifierFromProduct(modifierProduct: Syrve.Product): IModifier {
     return {
         productId: modifierProduct.id,
         productGroupId: modifierProduct.groupId,

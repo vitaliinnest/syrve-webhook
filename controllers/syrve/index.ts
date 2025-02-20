@@ -5,30 +5,35 @@ import syrveApi from "../../modules/SyrveApi";
 import config from "../../config";
 
 const webhook = async (req: Request, res: Response) => {
-    // console.log(JSON.stringify(req.body, null, 2));
+    if (req.body.test) {
+        return res.status(200).send({ success: true });
+    }
 
-    if (req.body.test) return res.status(200).send({ success: true });
-    if (req.body.webhook_id) return res.status(200).send({ success: true });
+    if (req.body.webhook_id) {
+        return res.status(200).send({ success: true });
+    }
 
     const delivery = await createDeliveryObject(req.body);
-    const [error, result] = await modules.to(syrveApi.createDelivery(delivery));
+    const [result, error] = await modules.to(syrveApi.createDeliveryAsync(delivery));
 
     if (error) {
         console.error(error);
         return res.send({ success: false, error });
     }
 
-    logData(delivery, result);
+    const statusOfDelivery = await syrveApi.getStatusOfDeliveryAsync(result);
+
+    logDeliveryInfo(result, statusOfDelivery);
+
     res.send(result);
 };
 
-function logData(delivery: IDeliveryCreatePayload, result: any) {
-    // console.log("delivery:");
-    // console.log(JSON.stringify(delivery, null, 2));
-    // console.log("\n");
-
-    console.log("result:");
+function logDeliveryInfo(result: any, statusOfDelivery: any) {
+    console.log("delivery created");
     console.log(JSON.stringify(result, null, 2));
+
+    console.log("status of delivery");
+    console.log(JSON.stringify(statusOfDelivery, null, 2));
 }
 
 async function createDeliveryObject(order: WoocommerceOrder): Promise<IDeliveryCreatePayload> {
