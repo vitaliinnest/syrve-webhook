@@ -18,7 +18,9 @@ const webhook = async (req: Request, res: Response) => {
     const [result, error] = await modules.to(syrveApi.createDeliveryAsync(delivery));
 
     if (error) {
-        console.error(error);
+        const ukraineTime = getUkraineTime();
+        console.log(`\n-----delivery failed at ${ukraineTime}-----`);
+        console.error(JSON.stringify(error, null, 2));
         return res.send({ success: false, error });
     }
 
