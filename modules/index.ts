@@ -30,7 +30,7 @@ export const prepareItems = (
 
     const items: IDeliveryItem[] = [];
     orderProducts.forEach((orderProduct) => {
-        const [sku, requiredModifier] = orderProduct.sku.split("_");
+        const [sku, requiredModifierCode] = orderProduct.sku.split("_");
         const syrveProduct = nomenclature.productByCodeMap[sku];
 
         if (syrveProduct) {
@@ -42,12 +42,12 @@ export const prepareItems = (
             };
 
             if (orderProduct.meta_data.length) {
-                if (isNumber(requiredModifier)) {
-                    const modifierProduct = nomenclature.productByCodeMap[requiredModifier];
+                if (isNumber(requiredModifierCode)) {
+                    const modifierProduct = nomenclature.productByCodeMap[requiredModifierCode];
                     const modifier: IModifier = {
-                        amount: 1,
                         productId: modifierProduct.id,
-                        productGroupId: syrveProduct.groupModifiers[0].id,
+                        productGroupId: modifierProduct.groupId,
+                        amount: 1,
                     };
                     deliveryItem.modifiers?.push(modifier);
                 }
@@ -57,8 +57,8 @@ export const prepareItems = (
                         const modifierProduct = nomenclature.productByCodeMap[Object.values(value[0].value)[0].value];
                         const modifier: IModifier = {
                             productId: modifierProduct.id,
+                            productGroupId: syrveProduct.groupId,
                             amount: 1,
-                            productGroupId: syrveProduct.groupModifiers[0].id,
                         };
                         deliveryItem.modifiers?.push(modifier);
                     }
