@@ -51,11 +51,15 @@ export const prepareItems = (
                     deliveryItem.modifiers?.push(modifier);
                 }
 
-                orderProduct.meta_data.forEach(({ value }) => {
+                orderProduct.meta_data.filter(m => m.key.startsWith("_WCPA")).forEach(({ value }) => {
                     if (Array.isArray(value)) {
-                        const modifierProduct = nomenclature.productByCodeMap[Object.values(value[0].value)[0].value];
-                        const modifier = createModifierFromProduct(modifierProduct);
-                        deliveryItem.modifiers?.push(modifier);
+                        const modifierProduct = value && value[0] && value[0].value 
+                            ? nomenclature.productByCodeMap[Object.values(value[0].value)[0].value] 
+                            : undefined;
+                        if (modifierProduct) {
+                            const modifier = createModifierFromProduct(modifierProduct);
+                            deliveryItem.modifiers?.push(modifier);
+                        }
                     }
                 });
 
