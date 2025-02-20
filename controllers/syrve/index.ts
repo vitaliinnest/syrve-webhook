@@ -29,10 +29,10 @@ const webhook = async (req: Request, res: Response) => {
 };
 
 function logDeliveryInfo(result: any, statusOfDelivery: any) {
-    console.log("delivery created");
+    console.log("\n-----delivery created-----");
     console.log(JSON.stringify(result, null, 2));
 
-    console.log("status of delivery");
+    console.log("\n-----status of delivery-----");
     console.log(JSON.stringify(statusOfDelivery, null, 2));
 }
 
