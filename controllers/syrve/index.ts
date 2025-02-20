@@ -18,15 +18,11 @@ const webhook = async (req: Request, res: Response) => {
         return res.send({ success: false, error });
     }
 
-    logData(delivery, result);
+    logData(result);
     res.send(result);
 };
 
-function logData(delivery: IDeliveryCreatePayload, result: any) {
-    console.log("delivery:");
-    console.log(JSON.stringify(delivery, null, 2));
-    console.log("\n");
-
+function logData(result: any) {
     console.log("result:");
     console.log(JSON.stringify(result, null, 2));
 }
