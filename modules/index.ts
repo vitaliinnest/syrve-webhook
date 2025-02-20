@@ -4,6 +4,8 @@ import config from "../config";
 
 export const to = (promise: Promise<any>) => promise.then((data) => [data, null]).catch((error) => [null, error]);
 
+export const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+
 export const findStreet = (name: string): string => {
     const streets: any = database.get("streets");
     if (streets[name]) return streets[name];

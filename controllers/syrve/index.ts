@@ -21,11 +21,11 @@ const webhook = async (req: Request, res: Response) => {
         return res.send({ success: false, error });
     }
 
-    const statusOfDelivery = await syrveApi.getStatusOfDeliveryAsync(result);
-
-    logDeliveryInfo(result, statusOfDelivery);
-
     res.send(result);
+
+    await modules.delay(3000);
+    const statusOfDelivery = await syrveApi.getStatusOfDeliveryAsync(result);
+    logDeliveryInfo(result, statusOfDelivery);
 };
 
 function logDeliveryInfo(result: any, statusOfDelivery: any) {
