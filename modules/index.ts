@@ -56,6 +56,7 @@ export const prepareItems = (
                         const modifierProduct = value && value[0] && value[0].value 
                             ? nomenclature.productByCodeMap[Object.values(value[0].value)[0].value] 
                             : undefined;
+                            
                         if (modifierProduct) {
                             const modifier = createModifierFromProduct(modifierProduct);
                             deliveryItem.modifiers?.push(modifier);
