@@ -58,7 +58,6 @@ export interface IDeliveryCreatePayload {
 
 export type IModifier = {
     productId: string;
-    name?: string;
     amount: number;
     productGroupId: string;
 };

@@ -45,9 +45,8 @@ export const prepareItems = (
                 if (isNumber(requiredModifier)) {
                     const modifierProduct = nomenclature.productByCodeMap[requiredModifier];
                     const modifier: IModifier = {
-                        name: modifierProduct.name,
-                        productId: modifierProduct.id,
                         amount: 1,
+                        productId: modifierProduct.id,
                         productGroupId: syrveProduct.groupModifiers[0].id,
                     };
                     deliveryItem.modifiers?.push(modifier);
@@ -57,7 +56,6 @@ export const prepareItems = (
                     if (Array.isArray(value)) {
                         const modifierProduct = nomenclature.productByCodeMap[Object.values(value[0].value)[0].value];
                         const modifier: IModifier = {
-                            name: modifierProduct.name,
                             productId: modifierProduct.id,
                             amount: 1,
                             productGroupId: syrveProduct.groupModifiers[0].id,
