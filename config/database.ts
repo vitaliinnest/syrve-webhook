@@ -19,7 +19,7 @@ export const database = {
         nomenclature.productByCodeMap = nomenclature.products.reduce((map, product) => {
             map[product.code] = product;
             return map;
-        }, {} as { [key: string]: ISyrveNomenclatureSpace.Product });
+        }, {} as ISyrveNomenclatureSpace.ProductDictionary);
         return nomenclature;
     },
 };

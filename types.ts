@@ -188,12 +188,16 @@ export namespace ISyrveNomenclatureSpace {
         seoTitle?: any;
     }
 
+    export type ProductDictionary = {
+        [key: string]: Product;
+    };
+
     export interface RootObject {
         correlationId: string;
         groups: Group[];
         productCategories: ProductCategory[];
         products: Product[];
-        productByCodeMap: { [key: string]: Product };
+        productByCodeMap: ProductDictionary;
         sizes: any[];
         revision: number;
     }
