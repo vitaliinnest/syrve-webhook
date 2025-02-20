@@ -1,4 +1,4 @@
-import { IDeliveryItem, IModifier, WoocommerceOrder, WoocommerceProduct } from "../types";
+import { IDeliveryItem, IModifier, ISyrveNomenclatureSpace, WoocommerceOrder, WoocommerceProduct } from "../types";
 import { database } from "../config/database";
 import config from "../config";
 
@@ -44,22 +44,14 @@ export const prepareItems = (
             if (orderProduct.meta_data.length) {
                 if (isNumber(requiredModifierCode)) {
                     const modifierProduct = nomenclature.productByCodeMap[requiredModifierCode];
-                    const modifier: IModifier = {
-                        productId: modifierProduct.id,
-                        productGroupId: modifierProduct.groupId,
-                        amount: 1,
-                    };
+                    const modifier = createModifierFromProduct(modifierProduct);
                     deliveryItem.modifiers?.push(modifier);
                 }
 
                 orderProduct.meta_data.forEach(({ value }) => {
                     if (Array.isArray(value)) {
                         const modifierProduct = nomenclature.productByCodeMap[Object.values(value[0].value)[0].value];
-                        const modifier: IModifier = {
-                            productId: modifierProduct.id,
-                            productGroupId: syrveProduct.groupId,
-                            amount: 1,
-                        };
+                        const modifier = createModifierFromProduct(modifierProduct);
                         deliveryItem.modifiers?.push(modifier);
                     }
                 });
@@ -92,6 +84,14 @@ export const prepareItems = (
 
     return { items, notFoundItems };
 };
+
+function createModifierFromProduct(modifierProduct: ISyrveNomenclatureSpace.Product): IModifier {
+    return {
+        productId: modifierProduct.id,
+        productGroupId: modifierProduct.groupId,
+        amount: 1,
+    };
+}
 
 function isNumber(value: string | undefined): boolean {
     return value !== undefined && value !== null && value !== "" && !isNaN(Number(value.toString()));
