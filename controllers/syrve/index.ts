@@ -1,5 +1,5 @@
 import * as modules from "../../modules";
-import { WoocommerceOrder, IDeliveryCreatePayload, PaymentTypeKind, OrderAddressKey } from "../../types";
+import { WoocommerceOrder, IDeliveryCreatePayload, PaymentTypeKind, OrderAddressKey, Syrve } from "../../types";
 import { Request, Response } from "express";
 import syrveApi from "../../modules/SyrveApi";
 import config from "../../config";
@@ -23,8 +23,17 @@ const webhook = async (req: Request, res: Response) => {
 
     res.send(result);
 
-    await modules.delay(3000);
-    const statusOfDelivery = await syrveApi.getStatusOfDeliveryAsync(result);
+    let statusOfDelivery: Syrve.DeliveryStatusResponse = { state: "InProgress" };
+    const MAX_ATTEMPTS = 5;
+    let attempts = 0;
+    do {
+        statusOfDelivery = await syrveApi.getStatusOfDeliveryAsync(result);
+        attempts++;
+        if (statusOfDelivery.state === "InProgress") {
+            await modules.delay(3000);
+        }
+    } while (statusOfDelivery.state === "InProgress" && attempts <= MAX_ATTEMPTS);
+
     logDeliveryInfo(result, statusOfDelivery);
 };
 

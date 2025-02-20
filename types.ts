@@ -215,6 +215,10 @@ export namespace Syrve {
         orderInfo: OrderInfo;
     }
 
+    export interface DeliveryStatusResponse {
+        state: "InProgress" | "Success" | "Error";
+    }
+
     interface OrderInfo {
         id: string;
         posId: string;

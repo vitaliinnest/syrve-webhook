@@ -69,7 +69,7 @@ class SyrveApi {
         return response;
     }
 
-    async getStatusOfDeliveryAsync(deliveryPayload: Syrve.DeliveryCreatedPayload): Promise<any> {
+    async getStatusOfDeliveryAsync(deliveryPayload: Syrve.DeliveryCreatedPayload): Promise<Syrve.DeliveryStatusResponse> {
         const [response, error] = await to(
             this.axios.post("commands/status", {
                 organizationId: config.SYRVE.organizationId,
