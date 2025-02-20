@@ -1,6 +1,7 @@
 import { IDeliveryItem, IModifier, Syrve, WoocommerceOrder, WoocommerceProduct } from "../types";
 import { database } from "../config/database";
 import config from "../config";
+import stringSimilarity from "string-similarity";
 
 export const to = (promise: Promise<any>) => promise.then((data) => [data, null]).catch((error) => [null, error]);
 
@@ -10,10 +11,10 @@ export const findStreet = (name: string): string => {
     const streets: any = database.get("streets");
     if (streets[name]) return streets[name];
 
-    // const {
-    //     bestMatch: { target, rating },
-    // } = stringSimilarity.findBestMatch(name, Object.keys(streets));
-    // if (target && rating > 0.65) return streets[target];
+    const {
+        bestMatch: { target, rating },
+    } = stringSimilarity.findBestMatch(name, Object.keys(streets));
+    if (target && rating > 0.65) return streets[target];
 
     return config.SYRVE.streets.undefined;
 };

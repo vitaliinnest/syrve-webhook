@@ -3,6 +3,7 @@ import { WoocommerceOrder, IDeliveryCreatePayload, PaymentTypeKind, OrderAddress
 import { Request, Response } from "express";
 import syrveApi from "../../modules/SyrveApi";
 import config from "../../config";
+import { format } from "date-fns-tz";
 
 const webhook = async (req: Request, res: Response) => {
     if (req.body.test) {
@@ -38,11 +39,17 @@ const webhook = async (req: Request, res: Response) => {
 };
 
 function logDeliveryInfo(result: any, statusOfDelivery: any) {
-    console.log("\n-----delivery created-----");
+    const ukraineTime = getUkraineTime();
+    console.log(`\n-----delivery created at ${ukraineTime}-----`);
     console.log(JSON.stringify(result, null, 2));
 
-    console.log("\n-----status of delivery-----");
+    console.log(`\n-----status of delivery at ${ukraineTime}-----`);
     console.log(JSON.stringify(statusOfDelivery, null, 2));
+}
+
+function getUkraineTime(): string {
+    const timeZone = 'Europe/Kiev';
+    return format(new Date(), 'dd.MM.yyyy HH:mm:ssXXX', { timeZone });
 }
 
 async function createDeliveryObject(order: WoocommerceOrder): Promise<IDeliveryCreatePayload> {
