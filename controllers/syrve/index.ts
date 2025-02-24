@@ -50,8 +50,8 @@ function logDeliveryInfo(result: any, statusOfDelivery: any) {
 }
 
 function getUkraineTime(): string {
-    const timeZone = 'Europe/Kiev';
-    return format(new Date(), 'dd.MM.yyyy HH:mm:ssXXX', { timeZone });
+    const timeZone = "Europe/Kiev";
+    return format(new Date(), "dd.MM.yyyy HH:mm:ssXXX", { timeZone });
 }
 
 async function createDeliveryObject(order: WoocommerceOrder): Promise<IDeliveryCreatePayload> {
